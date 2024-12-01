@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace projectoPOO
@@ -15,26 +15,38 @@ namespace projectoPOO
 			Sql.SqlConn();
 			connection = Sql.SqlConn();
 			lbl_conn.Text = connection.ToString();
-		}
-		private void Form1_Load(object sender, EventArgs e)
-		{
+
+			txtStudentNumber.ReadOnly = true;
+			txtStudentCourse.ReadOnly = true;
+			txtStudentName.ReadOnly = true;
+			txtStudentLastName.ReadOnly = true;
+			txtStudentBirthdate.ReadOnly = true;
+			txtStudentAddress.ReadOnly = true;
+			txtStudentEmail.ReadOnly = true;
+			txtStudentPhone.ReadOnly = true;
+
 		}
 
-		public void ListData()
+		private void btnSearchStudent_Click(object sender, System.EventArgs e)
 		{
-			ArrayList students = new ArrayList();
-			students = Sql.SqlUserData();
-			for (int i = 0; i < students.Count; i++)
+			int number = Int32.Parse(txtSearchStudent.Text);
+			List<Student> student = Students.GetStudents(number);
+
+			if (student.Count > 0)
 			{
-				lb_students_list.Items.Add($"Nome: {i.ToString()}");
+				txtStudentNumber.Text = student[0].Number;
+				txtStudentCourse.Text = student[0].CourseRef;
+				txtStudentName.Text = student[0].Name;
+				txtStudentLastName.Text = student[0].LastName;
+				txtStudentBirthdate.Text = student[0].Birthday;
+				txtStudentAddress.Text = student[0].Address;
+				txtStudentEmail.Text = student[0].Email;
+				txtStudentPhone.Text = student[0].Phone;
 			}
-
-		}
-
-
-		private void btn_get_students_Click(object sender, EventArgs e)
-		{
-			ListData();
+			else
+			{
+				MessageBox.Show($"Nenhum aluno encontrado com o número {number}", "Info");
+			}
 		}
 	}
 }

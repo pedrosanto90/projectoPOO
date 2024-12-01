@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 
 namespace projectoPOO
 {
@@ -23,18 +22,5 @@ namespace projectoPOO
 			}
 		}
 
-		public static ArrayList SqlUserData()
-		{
-			ArrayList data = new ArrayList();
-
-			string userQuery = "SELECT nomeProprio FROM Aluno";
-			SqlCommand studentData = new SqlCommand(userQuery);
-			for (int i = 0; i < studentData.Parameters.Count; i++)
-			{
-				data.Add(studentData.Parameters[i].Value);
-			}
-			return data;
-
-		}
 	}
 }
