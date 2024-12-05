@@ -12,6 +12,42 @@ namespace projectoPOO
 		{
 			InitializeComponent();
 
+			// Create a MenuStrip control with a new window.
+			MenuStrip ms = new MenuStrip();
+			ToolStripMenuItem windowMenu = new ToolStripMenuItem("Aluno");
+			ToolStripMenuItem windowMenuTeacher = new ToolStripMenuItem("Docentes");
+			ToolStripMenuItem newStudent = new ToolStripMenuItem("Novo Aluno", null, new EventHandler(newStudent_Click));
+			ToolStripMenuItem updateStudent = new ToolStripMenuItem("Actualizar Aluno", null, new EventHandler(newStudent_Click));
+			//	ToolStripMenuItem newTeacher = new ToolStripMenuItem("Novo Professor", null, new EventHandler(windowNewMenu_Click));
+			//	ToolStripMenuItem newCourse = new ToolStripMenuItem("Novo Curso", null, new EventHandler(windowNewMenu_Click));
+			//	ToolStripMenuItem newSubject = new ToolStripMenuItem("Nova Unidade Curricular", null, new EventHandler(windowNewMenu_Click));
+
+			windowMenu.DropDownItems.Add(newStudent);
+			windowMenu.DropDownItems.Add(updateStudent);
+			//	windowMenu.DropDownItems.Add(newCourse);
+			//	windowMenu.DropDownItems.Add(newSubject);
+			((ToolStripDropDownMenu)(windowMenu.DropDown)).ShowImageMargin = false;
+			((ToolStripDropDownMenu)(windowMenu.DropDown)).ShowCheckMargin = true;
+
+			// Assign the ToolStripMenuItem that displays 
+			// the list of child forms.
+			ms.MdiWindowListItem = windowMenu;
+			ms.MdiWindowListItem = windowMenuTeacher;
+
+			// Add the window ToolStripMenuItem to the MenuStrip.
+			ms.Items.Add(windowMenu);
+			ms.Items.Add(windowMenuTeacher);
+
+			// Dock the MenuStrip to the top of the form.
+			ms.Dock = DockStyle.Top;
+
+			// The Form.MainMenuStrip property determines the merge target.
+			this.MainMenuStrip = ms;
+
+			// Add the MenuStrip last.
+			// This is important for correct placement in the z-order.
+			this.Controls.Add(ms);
+
 			Sql.SqlConn();
 			connection = Sql.SqlConn();
 			lbl_conn.Text = connection.ToString();
@@ -47,6 +83,12 @@ namespace projectoPOO
 			{
 				MessageBox.Show($"Nenhum aluno encontrado com o número {number}", "Info");
 			}
+		}
+		void newStudent_Click(object sender, EventArgs e)
+		{
+			Form2 f = new Form2();
+			f.Text = "Novo Aluno" + this.MdiChildren.Length.ToString();
+			f.Show();
 		}
 	}
 }
