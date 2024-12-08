@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace projectoPOO
 {
@@ -16,5 +10,20 @@ namespace projectoPOO
 		{
 			InitializeComponent();
 		}
+
+		private void btnAddStudent_Click(object sender, EventArgs e)
+		{
+			Student newStudent = new Student();
+
+			newStudent.Name = txtAddName.Text;
+			newStudent.LastName = txtAddLastName.Text;
+			newStudent.Birthday = txtAddBirthdate.Value.ToString("yyyy-MM-dd");
+			newStudent.Address = txtAddAddress.Text;
+			newStudent.Email = txtAddEmail.Text;
+			newStudent.Phone = txtAddPhone.Text;
+
+			Students.AddStudent(newStudent);
+		}
+
 	}
 }

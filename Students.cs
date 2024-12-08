@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 struct Student
 {
@@ -14,6 +15,7 @@ struct Student
 
 namespace projectoPOO
 {
+
 	internal class Students
 	{
 		public static List<Student> GetStudents(int numero)
@@ -52,6 +54,41 @@ namespace projectoPOO
 				}
 			}
 			return students;
+		}
+
+		public static bool AddStudent(Student student)
+		{
+
+			string connectionString = "Data Source=(local); User ID=pedro; Initial Catalog=EscolaDB; Integrated Security=True;";
+
+			using (SqlConnection cn = new SqlConnection(connectionString))
+			{
+				cn.Open();
+				string query = "SELECT TOP 1 numero FROM Aluno ORDER BY numero DESC;";
+				SqlCommand command = new SqlCommand(query, cn);
+				SqlDataReader reader = command.ExecuteReader();
+				Console.WriteLine(reader.ToString());
+				string numero = reader["numero"].ToString();
+				int studentNumber = Int32.Parse(numero) + 1;
+
+				query = @"INSERT INTO Aluno 
+                                (numero, referenciaCurso, nomeProprio, apelido, dataNascimento, morada, email, telefone) 
+                                VALUES (@numero, @referenciaCurso, @nomeProprio, @apelido, @dataNascimento, @morada, @email, @telefone)";
+
+				using (SqlCommand cmd = new SqlCommand(query, cn))
+				{
+					cmd.Parameters.AddWithValue("@numero", studentNumber);
+					cmd.Parameters.AddWithValue("@referenciaCurso", 100);
+					cmd.Parameters.AddWithValue("@nomeProprio", student.Name);
+					cmd.Parameters.AddWithValue("@apelido", student.LastName);
+					cmd.Parameters.AddWithValue("@dataNascimento", DateTime.Parse(student.Birthday));
+					cmd.Parameters.AddWithValue("@morada", student.Address);
+					cmd.Parameters.AddWithValue("@email", student.Email);
+					cmd.Parameters.AddWithValue("@telefone", student.Phone);
+
+					return cmd.ExecuteNonQuery() > 0;
+				}
+			}
 		}
 	}
 }
