@@ -20,7 +20,7 @@ namespace projectoPOO
 	{
 		public static List<Student> GetStudents(int numero)
 		{
-			string connectionString = "Data Source=(local); User ID=pedro; Initial Catalog=escoladb; Integrated Security=True;";
+			string connectionString = "Data Source=(local); User ID=joao; Initial Catalog=escoladb; Integrated Security=True;";
 			List<Student> students = new List<Student>();
 
 			using (SqlConnection cn = new SqlConnection(connectionString))
@@ -56,39 +56,84 @@ namespace projectoPOO
 			return students;
 		}
 
-		public static bool AddStudent(Student student)
-		{
+        public static bool AddStudent(Student student)
+        {
+            string connectionString = "Data Source=(local); User ID=joao; Initial Catalog=EscolaDB; Integrated Security=True;";
 
-			string connectionString = "Data Source=(local); User ID=pedro; Initial Catalog=EscolaDB; Integrated Security=True;";
+            using (SqlConnection cn = new SqlConnection(connectionString))
+            {
+                cn.Open();
 
-			using (SqlConnection cn = new SqlConnection(connectionString))
-			{
-				cn.Open();
-				string query = "SELECT TOP 1 numero FROM Aluno ORDER BY numero DESC;";
-				SqlCommand command = new SqlCommand(query, cn);
-				SqlDataReader reader = command.ExecuteReader();
-				Console.WriteLine(reader.ToString());
-				string numero = reader["numero"].ToString();
-				int studentNumber = Int32.Parse(numero) + 1;
+                // Obter o maior número
+                string query = "SELECT MAX(numero) AS maior_numero FROM Aluno;";
+                int studentNumber = 1; // Caso não haja alunos na tabela, começamos do 1.
 
-				query = @"INSERT INTO Aluno 
-                                (numero, referenciaCurso, nomeProprio, apelido, dataNascimento, morada, email, telefone) 
-                                VALUES (@numero, @referenciaCurso, @nomeProprio, @apelido, @dataNascimento, @morada, @email, @telefone)";
+                using (SqlCommand command = new SqlCommand(query, cn))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read() && !reader.IsDBNull(0)) // Verifica se há valor
+                        {
+                            studentNumber = reader.GetInt32(0) + 1; // Incrementa o maior número
+                        }
+                    }
+                }
 
-				using (SqlCommand cmd = new SqlCommand(query, cn))
-				{
-					cmd.Parameters.AddWithValue("@numero", studentNumber);
-					cmd.Parameters.AddWithValue("@referenciaCurso", 100);
-					cmd.Parameters.AddWithValue("@nomeProprio", student.Name);
-					cmd.Parameters.AddWithValue("@apelido", student.LastName);
-					cmd.Parameters.AddWithValue("@dataNascimento", DateTime.Parse(student.Birthday));
-					cmd.Parameters.AddWithValue("@morada", student.Address);
-					cmd.Parameters.AddWithValue("@email", student.Email);
-					cmd.Parameters.AddWithValue("@telefone", student.Phone);
+                // Gerar o e-mail do aluno
+                string studentEmail = $"aluno{studentNumber}@ipw.pt";
 
-					return cmd.ExecuteNonQuery() > 0;
-				}
-			}
-		}
-	}
+                // Inserir o novo aluno
+                query = @"INSERT INTO Aluno 
+                    (numero, referenciaCurso, nomeProprio, apelido, dataNascimento, morada, email, telefone) 
+                  VALUES 
+                    (@numero, @referenciaCurso, @nomeProprio, @apelido, @dataNascimento, @morada, @email, @telefone)";
+
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                {
+                    cmd.Parameters.AddWithValue("@numero", studentNumber);
+                    cmd.Parameters.AddWithValue("@referenciaCurso", 100);
+                    cmd.Parameters.AddWithValue("@nomeProprio", student.Name);
+                    cmd.Parameters.AddWithValue("@apelido", student.LastName);
+                    cmd.Parameters.AddWithValue("@dataNascimento", DateTime.Parse(student.Birthday));
+                    cmd.Parameters.AddWithValue("@morada", student.Address);
+                    cmd.Parameters.AddWithValue("@email", studentEmail);
+                    cmd.Parameters.AddWithValue("@telefone", student.Phone);
+
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public static bool UpdateStudent(Student student)
+        {
+            string connectionString = "Data Source=(local); User ID=joao; Initial Catalog=EscolaDB; Integrated Security=True;";
+
+            using (SqlConnection cn = new SqlConnection(connectionString))
+            {
+                cn.Open();
+
+                string query = @"UPDATE Aluno 
+                             SET referenciaCurso = @referenciaCurso,
+                                 nomeProprio = @nomeProprio,
+                                 apelido = @apelido,
+                                 dataNascimento = @dataNascimento,
+                                 morada = @morada,
+                                 telefone = @telefone
+                             WHERE numero = @numero";
+
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                {
+                    cmd.Parameters.AddWithValue("@numero", student.Number);
+                    cmd.Parameters.AddWithValue("@referenciaCurso", student.CourseRef);
+                    cmd.Parameters.AddWithValue("@nomeProprio", student.Name);
+                    cmd.Parameters.AddWithValue("@apelido", student.LastName);
+                    cmd.Parameters.AddWithValue("@dataNascimento", DateTime.Parse(student.Birthday));
+                    cmd.Parameters.AddWithValue("@morada", student.Address);
+                    cmd.Parameters.AddWithValue("@telefone", student.Phone);
+
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+    }
 }

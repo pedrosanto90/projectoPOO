@@ -19,11 +19,15 @@ namespace projectoPOO
 			newStudent.LastName = txtAddLastName.Text;
 			newStudent.Birthday = txtAddBirthdate.Value.ToString("yyyy-MM-dd");
 			newStudent.Address = txtAddAddress.Text;
-			newStudent.Email = txtAddEmail.Text;
 			newStudent.Phone = txtAddPhone.Text;
 
 			Students.AddStudent(newStudent);
+			this.Close();
 		}
 
-	}
+        private void btnCancelAddStudent_Click(object sender, EventArgs e)
+        {
+			this.Close();
+        }
+    }
 }
