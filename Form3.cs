@@ -28,7 +28,7 @@ namespace projectoPOO
                 lvStudents.Columns.Add("Número");
                 lvStudents.Columns.Add("Curso");
                 lvStudents.Columns.Add("Nome");
-                lvStudents.Columns.Add("Sobrenome");
+                lvStudents.Columns.Add("Apelido");
                 lvStudents.Columns.Add("Data de Nascimento");
                 lvStudents.Columns.Add("Morada");
                 lvStudents.Columns.Add("E-mail");

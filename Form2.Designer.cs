@@ -29,10 +29,10 @@
 		private void InitializeComponent()
 		{
             this.label1 = new System.Windows.Forms.Label();
-            this.txtAddName = new System.Windows.Forms.TextBox();
-            this.txtAddPhone = new System.Windows.Forms.TextBox();
-            this.txtAddAddress = new System.Windows.Forms.TextBox();
-            this.txtAddLastName = new System.Windows.Forms.TextBox();
+            this.txtAddNameStudent = new System.Windows.Forms.TextBox();
+            this.txtAddPhoneStudent = new System.Windows.Forms.TextBox();
+            this.txtAddAddressStudent = new System.Windows.Forms.TextBox();
+            this.txtAddLastNameStudent = new System.Windows.Forms.TextBox();
             this.lbl2 = new System.Windows.Forms.Label();
             this.txtdate = new System.Windows.Forms.Label();
             this.txtfjdks = new System.Windows.Forms.Label();
@@ -40,7 +40,7 @@
             this.btnCancelAddStudent = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.btnAddStudent = new System.Windows.Forms.Button();
-            this.txtAddBirthdate = new System.Windows.Forms.DateTimePicker();
+            this.txtAddBirthdateStudent = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // label1
@@ -52,33 +52,33 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Primeiro Nome";
             // 
-            // txtAddName
+            // txtAddNameStudent
             // 
-            this.txtAddName.Location = new System.Drawing.Point(148, 123);
-            this.txtAddName.Name = "txtAddName";
-            this.txtAddName.Size = new System.Drawing.Size(100, 20);
-            this.txtAddName.TabIndex = 1;
+            this.txtAddNameStudent.Location = new System.Drawing.Point(148, 123);
+            this.txtAddNameStudent.Name = "txtAddNameStudent";
+            this.txtAddNameStudent.Size = new System.Drawing.Size(100, 20);
+            this.txtAddNameStudent.TabIndex = 1;
             // 
-            // txtAddPhone
+            // txtAddPhoneStudent
             // 
-            this.txtAddPhone.Location = new System.Drawing.Point(349, 205);
-            this.txtAddPhone.Name = "txtAddPhone";
-            this.txtAddPhone.Size = new System.Drawing.Size(100, 20);
-            this.txtAddPhone.TabIndex = 2;
+            this.txtAddPhoneStudent.Location = new System.Drawing.Point(349, 205);
+            this.txtAddPhoneStudent.Name = "txtAddPhoneStudent";
+            this.txtAddPhoneStudent.Size = new System.Drawing.Size(100, 20);
+            this.txtAddPhoneStudent.TabIndex = 2;
             // 
-            // txtAddAddress
+            // txtAddAddressStudent
             // 
-            this.txtAddAddress.Location = new System.Drawing.Point(148, 205);
-            this.txtAddAddress.Name = "txtAddAddress";
-            this.txtAddAddress.Size = new System.Drawing.Size(100, 20);
-            this.txtAddAddress.TabIndex = 3;
+            this.txtAddAddressStudent.Location = new System.Drawing.Point(148, 205);
+            this.txtAddAddressStudent.Name = "txtAddAddressStudent";
+            this.txtAddAddressStudent.Size = new System.Drawing.Size(100, 20);
+            this.txtAddAddressStudent.TabIndex = 3;
             // 
-            // txtAddLastName
+            // txtAddLastNameStudent
             // 
-            this.txtAddLastName.Location = new System.Drawing.Point(349, 123);
-            this.txtAddLastName.Name = "txtAddLastName";
-            this.txtAddLastName.Size = new System.Drawing.Size(100, 20);
-            this.txtAddLastName.TabIndex = 4;
+            this.txtAddLastNameStudent.Location = new System.Drawing.Point(349, 123);
+            this.txtAddLastNameStudent.Name = "txtAddLastNameStudent";
+            this.txtAddLastNameStudent.Size = new System.Drawing.Size(100, 20);
+            this.txtAddLastNameStudent.TabIndex = 4;
             // 
             // lbl2
             // 
@@ -145,22 +145,22 @@
             this.btnAddStudent.UseVisualStyleBackColor = true;
             this.btnAddStudent.Click += new System.EventHandler(this.btnAddStudent_Click);
             // 
-            // txtAddBirthdate
+            // txtAddBirthdateStudent
             // 
-            this.txtAddBirthdate.CustomFormat = "yyyy-mm-dd";
-            this.txtAddBirthdate.Location = new System.Drawing.Point(524, 123);
-            this.txtAddBirthdate.MaxDate = new System.DateTime(2024, 12, 8, 0, 0, 0, 0);
-            this.txtAddBirthdate.Name = "txtAddBirthdate";
-            this.txtAddBirthdate.Size = new System.Drawing.Size(200, 20);
-            this.txtAddBirthdate.TabIndex = 19;
-            this.txtAddBirthdate.Value = new System.DateTime(2024, 12, 8, 0, 0, 0, 0);
+            this.txtAddBirthdateStudent.CustomFormat = "yyyy-mm-dd";
+            this.txtAddBirthdateStudent.Location = new System.Drawing.Point(524, 123);
+            this.txtAddBirthdateStudent.MaxDate = new System.DateTime(2024, 12, 8, 0, 0, 0, 0);
+            this.txtAddBirthdateStudent.Name = "txtAddBirthdateStudent";
+            this.txtAddBirthdateStudent.Size = new System.Drawing.Size(200, 20);
+            this.txtAddBirthdateStudent.TabIndex = 19;
+            this.txtAddBirthdateStudent.Value = new System.DateTime(2024, 12, 8, 0, 0, 0, 0);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.txtAddBirthdate);
+            this.Controls.Add(this.txtAddBirthdateStudent);
             this.Controls.Add(this.btnAddStudent);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.btnCancelAddStudent);
@@ -168,10 +168,10 @@
             this.Controls.Add(this.txtfjdks);
             this.Controls.Add(this.txtdate);
             this.Controls.Add(this.lbl2);
-            this.Controls.Add(this.txtAddLastName);
-            this.Controls.Add(this.txtAddAddress);
-            this.Controls.Add(this.txtAddPhone);
-            this.Controls.Add(this.txtAddName);
+            this.Controls.Add(this.txtAddLastNameStudent);
+            this.Controls.Add(this.txtAddAddressStudent);
+            this.Controls.Add(this.txtAddPhoneStudent);
+            this.Controls.Add(this.txtAddNameStudent);
             this.Controls.Add(this.label1);
             this.Name = "Form2";
             this.Text = "Novo Aluno";
@@ -183,10 +183,10 @@
 		#endregion
 
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.TextBox txtAddName;
-		private System.Windows.Forms.TextBox txtAddPhone;
-		private System.Windows.Forms.TextBox txtAddAddress;
-		private System.Windows.Forms.TextBox txtAddLastName;
+		private System.Windows.Forms.TextBox txtAddNameStudent;
+		private System.Windows.Forms.TextBox txtAddPhoneStudent;
+		private System.Windows.Forms.TextBox txtAddAddressStudent;
+		private System.Windows.Forms.TextBox txtAddLastNameStudent;
 		private System.Windows.Forms.Label lbl2;
 		private System.Windows.Forms.Label txtdate;
 		private System.Windows.Forms.Label txtfjdks;
@@ -194,6 +194,6 @@
 		private System.Windows.Forms.Button btnCancelAddStudent;
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.Button btnAddStudent;
-		private System.Windows.Forms.DateTimePicker txtAddBirthdate;
+		private System.Windows.Forms.DateTimePicker txtAddBirthdateStudent;
 	}
 }

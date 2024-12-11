@@ -53,6 +53,8 @@
             this.btnSearchStudent = new System.Windows.Forms.Button();
             this.txtSearchStudent = new System.Windows.Forms.TextBox();
             this.tabTeachers = new System.Windows.Forms.TabPage();
+            this.btnCancelUpdateTeacher = new System.Windows.Forms.Button();
+            this.btnUpdateTeacher = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -310,6 +312,8 @@
             // 
             // tabTeachers
             // 
+            this.tabTeachers.Controls.Add(this.btnCancelUpdateTeacher);
+            this.tabTeachers.Controls.Add(this.btnUpdateTeacher);
             this.tabTeachers.Controls.Add(this.label2);
             this.tabTeachers.Controls.Add(this.label3);
             this.tabTeachers.Controls.Add(this.label4);
@@ -336,6 +340,26 @@
             this.tabTeachers.TabIndex = 1;
             this.tabTeachers.Text = "Docentes";
             this.tabTeachers.UseVisualStyleBackColor = true;
+            // 
+            // btnCancelUpdateTeacher
+            // 
+            this.btnCancelUpdateTeacher.Location = new System.Drawing.Point(48, 307);
+            this.btnCancelUpdateTeacher.Name = "btnCancelUpdateTeacher";
+            this.btnCancelUpdateTeacher.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelUpdateTeacher.TabIndex = 39;
+            this.btnCancelUpdateTeacher.Text = "Cancelar";
+            this.btnCancelUpdateTeacher.UseVisualStyleBackColor = true;
+            this.btnCancelUpdateTeacher.Click += new System.EventHandler(this.btnCancelUpdateTeacher_Click);
+            // 
+            // btnUpdateTeacher
+            // 
+            this.btnUpdateTeacher.Location = new System.Drawing.Point(145, 307);
+            this.btnUpdateTeacher.Name = "btnUpdateTeacher";
+            this.btnUpdateTeacher.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdateTeacher.TabIndex = 38;
+            this.btnUpdateTeacher.Text = "Atualizar";
+            this.btnUpdateTeacher.UseVisualStyleBackColor = true;
+            this.btnUpdateTeacher.Click += new System.EventHandler(this.btnUpdateTeacher_Click);
             // 
             // label2
             // 
@@ -577,6 +601,8 @@
         private System.Windows.Forms.TextBox txtTeacherPhone;
         private System.Windows.Forms.Button btnUpdateStudent;
         private System.Windows.Forms.Button btnCancelUpdateStudent;
+        private System.Windows.Forms.Button btnCancelUpdateTeacher;
+        private System.Windows.Forms.Button btnUpdateTeacher;
     }
 }
 

@@ -16,32 +16,42 @@ namespace projectoPOO
 			MenuStrip ms = new MenuStrip();
 			ToolStripMenuItem windowMenu = new ToolStripMenuItem("Aluno");
 			ToolStripMenuItem windowMenuTeacher = new ToolStripMenuItem("Docentes");
-			ToolStripMenuItem newStudent = new ToolStripMenuItem("Novo Aluno", null, new EventHandler(newStudent_Click));
+            ToolStripMenuItem windowMenuCourse = new ToolStripMenuItem("Cursos");
+            ToolStripMenuItem windowMenuSubject = new ToolStripMenuItem("Unidade Curricular");
+            ToolStripMenuItem newStudent = new ToolStripMenuItem("Novo Aluno", null, new EventHandler(newStudent_Click));
             ToolStripMenuItem updateStudent = new ToolStripMenuItem("Actualizar Aluno", null, new EventHandler(updateStudent_Click));
             ToolStripMenuItem showAllStudents = new ToolStripMenuItem("Mostrar todos os Alunos", null, new EventHandler(showAllStudents_Click));
-            //	ToolStripMenuItem newTeacher = new ToolStripMenuItem("Novo Professor", null, new EventHandler(windowNewMenu_Click));
+            ToolStripMenuItem newTeacher = new ToolStripMenuItem("Novo Docente", null, new EventHandler(newTeacher_Click));
+            ToolStripMenuItem updateTeacher = new ToolStripMenuItem("Actualizar Docente", null, new EventHandler(updateTeacher_Click));
+            ToolStripMenuItem showAllTeachers = new ToolStripMenuItem("Mostrar todos os Docentes", null, new EventHandler(showAllTeachers_Click));
             //	ToolStripMenuItem newCourse = new ToolStripMenuItem("Novo Curso", null, new EventHandler(windowNewMenu_Click));
             //	ToolStripMenuItem newSubject = new ToolStripMenuItem("Nova Unidade Curricular", null, new EventHandler(windowNewMenu_Click));
 
             windowMenu.DropDownItems.Add(newStudent);
 			windowMenu.DropDownItems.Add(updateStudent);
             windowMenu.DropDownItems.Add(showAllStudents);
-			//	windowMenu.DropDownItems.Add(newCourse);
-			//	windowMenu.DropDownItems.Add(newSubject);
-			((ToolStripDropDownMenu)(windowMenu.DropDown)).ShowImageMargin = false;
+            windowMenuTeacher.DropDownItems.Add(newTeacher);
+            windowMenuTeacher.DropDownItems.Add(updateTeacher);
+            windowMenuTeacher.DropDownItems.Add(showAllTeachers);
+
+            ((ToolStripDropDownMenu)(windowMenu.DropDown)).ShowImageMargin = false;
 			((ToolStripDropDownMenu)(windowMenu.DropDown)).ShowCheckMargin = true;
 
 			// Assign the ToolStripMenuItem that displays 
 			// the list of child forms.
 			ms.MdiWindowListItem = windowMenu;
 			ms.MdiWindowListItem = windowMenuTeacher;
+            ms.MdiWindowListItem = windowMenuCourse;
+            ms.MdiWindowListItem = windowMenuSubject;
 
-			// Add the window ToolStripMenuItem to the MenuStrip.
-			ms.Items.Add(windowMenu);
+            // Add the window ToolStripMenuItem to the MenuStrip.
+            ms.Items.Add(windowMenu);
 			ms.Items.Add(windowMenuTeacher);
+            ms.Items.Add(windowMenuCourse);
+            ms.Items.Add(windowMenuSubject);
 
-			// Dock the MenuStrip to the top of the form.
-			ms.Dock = DockStyle.Top;
+            // Dock the MenuStrip to the top of the form.
+            ms.Dock = DockStyle.Top;
 
 			// The Form.MainMenuStrip property determines the merge target.
 			this.MainMenuStrip = ms;
@@ -62,10 +72,23 @@ namespace projectoPOO
 			txtStudentAddress.ReadOnly = true;
 			txtStudentEmail.ReadOnly = true;
 			txtStudentPhone.ReadOnly = true;
+
 			btnUpdateStudent.Visible = false;
             btnCancelUpdateStudent.Visible = false;
 
-		}
+            txtTeacherNumber.ReadOnly = true;
+            txtTeacherExtension.ReadOnly = true;
+            txtTeacherName.ReadOnly = true;
+            txtTeacherLastName.ReadOnly = true;
+            txtTeacherBirthdate.ReadOnly = true;
+            txtTeacherSalary.ReadOnly = true;
+            txtTeacherEmail.ReadOnly = true;
+            txtTeacherPhone.ReadOnly = true;
+
+            btnUpdateTeacher.Visible = false;
+            btnCancelUpdateTeacher.Visible = false;
+
+        }
 
 		private void btnSearchStudent_Click(object sender, System.EventArgs e)
 		{
@@ -168,9 +191,9 @@ namespace projectoPOO
 
         void showAllStudents_Click(object sender, EventArgs e)
         {
-            Form3 a = new Form3();
-            a.Text = "Todos os Alunos";
-            a.Show();
+            Form3 f = new Form3();
+            f.Text = "Todos os Alunos";
+            f.Show();
         }
 
 
@@ -195,9 +218,91 @@ namespace projectoPOO
                 MessageBox.Show($"Nenhum docente encontrado com o número {number}", "Info");
             }
         }
+
+        void newTeacher_Click(object sender, EventArgs e)
+        {
+            Form4 f = new Form4();
+            f.Text = "Novo Docente";
+            f.Show();
+        }
+
+        void updateTeacher_Click(object sender, EventArgs e)
+        {
+            txtTeacherExtension.ReadOnly = false;
+            txtTeacherName.ReadOnly = false;
+            txtTeacherLastName.ReadOnly = false;
+            txtTeacherBirthdate.ReadOnly = false;
+            txtTeacherSalary.ReadOnly = false;
+            txtTeacherPhone.ReadOnly = false;
+            btnUpdateTeacher.Visible = true;
+            btnCancelUpdateTeacher.Visible = true;
+        }
+
+        private void btnUpdateTeacher_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Criar um objeto docente com os dados atualizados
+                Teacher updatedTeacher = new Teacher
+                {
+                    Number = txtTeacherNumber.Text,  // Número do docente (não pode ser alterado)
+                    Extension = txtTeacherExtension.Text,
+                    Name = txtTeacherName.Text,
+                    LastName = txtTeacherLastName.Text,
+                    Birthday = txtTeacherBirthdate.Text,
+                    Salary = txtTeacherSalary.Text,
+                    Phone = txtTeacherPhone.Text
+                };
+
+                // Atualizar docente no banco
+                bool success = Teachers.UpdateTeacher(updatedTeacher);
+
+                if (success)
+                {
+                    MessageBox.Show("Docente atualizado com sucesso!", "Sucesso");
+                }
+                else
+                {
+                    MessageBox.Show("Erro ao atualizar o docente. Verifique os dados e tente novamente.", "Erro");
+                }
+
+                // Voltar os campos para somente leitura após atualização
+                txtTeacherExtension.ReadOnly = true;
+                txtTeacherName.ReadOnly = true;
+                txtTeacherLastName.ReadOnly = true;
+                txtTeacherBirthdate.ReadOnly = true;
+                txtTeacherSalary.ReadOnly = true;
+                txtTeacherPhone.ReadOnly = true;
+
+                // Ocultar botão de atualização
+                btnUpdateTeacher.Visible = false;
+                btnCancelUpdateTeacher.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro: {ex.Message}", "Erro");
+            }
+        }
+
+        private void btnCancelUpdateTeacher_Click(object sender, EventArgs e)
+        {
+            txtTeacherNumber.ReadOnly = true;
+            txtTeacherExtension.ReadOnly = true;
+            txtTeacherName.ReadOnly = true;
+            txtTeacherLastName.ReadOnly = true;
+            txtTeacherBirthdate.ReadOnly = true;
+            txtTeacherSalary.ReadOnly = true;
+            txtTeacherEmail.ReadOnly = true;
+            txtTeacherPhone.ReadOnly = true;
+            btnUpdateTeacher.Visible = false;
+            btnCancelUpdateTeacher.Visible = false;
+        }
+
+        void showAllTeachers_Click(object sender, EventArgs e)
+        {
+            Form5 f = new Form5();
+            f.Text = "Todos os Docentes";
+            f.Show();
+        }
     }
 }
-
-
-
-

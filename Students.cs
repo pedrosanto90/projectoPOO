@@ -145,17 +145,7 @@ namespace projectoPOO
             {
                 cn.Open();
 
-                string query = @"
-            SELECT 
-                numero, 
-                referenciaCurso, 
-                nomeProprio, 
-                apelido, 
-                dataNascimento, 
-                morada, 
-                email, 
-                telefone 
-            FROM Aluno";
+                string query = @"SELECT numero, referenciaCurso, nomeProprio, apelido, dataNascimento, morada, email, telefone FROM Aluno";
 
                 using (SqlCommand cmd = new SqlCommand(query, cn))
                 {
@@ -166,7 +156,7 @@ namespace projectoPOO
                             Student student = new Student
                             {
                                 Number = reader["numero"].ToString(),
-                                CourseRef = reader["referenciaCurso"].ToString(), // Inclua aqui
+                                CourseRef = reader["referenciaCurso"].ToString(),
                                 Name = reader["nomeProprio"].ToString(),
                                 LastName = reader["apelido"].ToString(),
                                 Birthday = reader["dataNascimento"].ToString(),
@@ -181,7 +171,5 @@ namespace projectoPOO
             }
             return allStudents;
         }
-
-
     }
 }

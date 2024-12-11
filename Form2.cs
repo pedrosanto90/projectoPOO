@@ -15,11 +15,11 @@ namespace projectoPOO
 		{
 			Student newStudent = new Student();
 
-			newStudent.Name = txtAddName.Text;
-			newStudent.LastName = txtAddLastName.Text;
-			newStudent.Birthday = txtAddBirthdate.Value.ToString("yyyy-MM-dd");
-			newStudent.Address = txtAddAddress.Text;
-			newStudent.Phone = txtAddPhone.Text;
+			newStudent.Name = txtAddNameStudent.Text;
+			newStudent.LastName = txtAddLastNameStudent.Text;
+			newStudent.Birthday = txtAddBirthdateStudent.Value.ToString("yyyy-MM-dd");
+			newStudent.Address = txtAddAddressStudent.Text;
+			newStudent.Phone = txtAddPhoneStudent.Text;
 
 			Students.AddStudent(newStudent);
 			this.Close();
