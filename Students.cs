@@ -135,5 +135,53 @@ namespace projectoPOO
                 }
             }
         }
+
+        public static List<Student> GetAllStudents()
+        {
+            string connectionString = "Data Source=(local); User ID=joao; Initial Catalog=EscolaDB; Integrated Security=True;";
+            List<Student> allStudents = new List<Student>();
+
+            using (SqlConnection cn = new SqlConnection(connectionString))
+            {
+                cn.Open();
+
+                string query = @"
+            SELECT 
+                numero, 
+                referenciaCurso, 
+                nomeProprio, 
+                apelido, 
+                dataNascimento, 
+                morada, 
+                email, 
+                telefone 
+            FROM Aluno";
+
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Student student = new Student
+                            {
+                                Number = reader["numero"].ToString(),
+                                CourseRef = reader["referenciaCurso"].ToString(), // Inclua aqui
+                                Name = reader["nomeProprio"].ToString(),
+                                LastName = reader["apelido"].ToString(),
+                                Birthday = reader["dataNascimento"].ToString(),
+                                Address = reader["morada"].ToString(),
+                                Email = reader["email"].ToString(),
+                                Phone = reader["telefone"].ToString()
+                            };
+                            allStudents.Add(student);
+                        }
+                    }
+                }
+            }
+            return allStudents;
+        }
+
+
     }
 }

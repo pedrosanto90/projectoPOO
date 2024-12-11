@@ -31,6 +31,8 @@
             this.lbl_conn = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabStudents = new System.Windows.Forms.TabPage();
+            this.btnCancelUpdateStudent = new System.Windows.Forms.Button();
+            this.btnUpdateStudent = new System.Windows.Forms.Button();
             this.lblPhone = new System.Windows.Forms.Label();
             this.lblAddress = new System.Windows.Forms.Label();
             this.lblLastName = new System.Windows.Forms.Label();
@@ -72,8 +74,6 @@
             this.txtSearchTeacher = new System.Windows.Forms.TextBox();
             this.tabCourses = new System.Windows.Forms.TabPage();
             this.tabSubjects = new System.Windows.Forms.TabPage();
-            this.btnUpdateStudent = new System.Windows.Forms.Button();
-            this.btnCancelUpdate = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabStudents.SuspendLayout();
             this.tabTeachers.SuspendLayout();
@@ -105,7 +105,7 @@
             // 
             // tabStudents
             // 
-            this.tabStudents.Controls.Add(this.btnCancelUpdate);
+            this.tabStudents.Controls.Add(this.btnCancelUpdateStudent);
             this.tabStudents.Controls.Add(this.btnUpdateStudent);
             this.tabStudents.Controls.Add(this.lblPhone);
             this.tabStudents.Controls.Add(this.lblAddress);
@@ -133,6 +133,26 @@
             this.tabStudents.TabIndex = 0;
             this.tabStudents.Text = "Alunos";
             this.tabStudents.UseVisualStyleBackColor = true;
+            // 
+            // btnCancelUpdateStudent
+            // 
+            this.btnCancelUpdateStudent.Location = new System.Drawing.Point(46, 306);
+            this.btnCancelUpdateStudent.Name = "btnCancelUpdateStudent";
+            this.btnCancelUpdateStudent.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelUpdateStudent.TabIndex = 20;
+            this.btnCancelUpdateStudent.Text = "Cancelar";
+            this.btnCancelUpdateStudent.UseVisualStyleBackColor = true;
+            this.btnCancelUpdateStudent.Click += new System.EventHandler(this.btnCancelUpdateStudent_Click);
+            // 
+            // btnUpdateStudent
+            // 
+            this.btnUpdateStudent.Location = new System.Drawing.Point(143, 306);
+            this.btnUpdateStudent.Name = "btnUpdateStudent";
+            this.btnUpdateStudent.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdateStudent.TabIndex = 19;
+            this.btnUpdateStudent.Text = "Atualizar";
+            this.btnUpdateStudent.UseVisualStyleBackColor = true;
+            this.btnUpdateStudent.Click += new System.EventHandler(this.btnUpdateStudent_Click);
             // 
             // lblPhone
             // 
@@ -491,26 +511,6 @@
             this.tabSubjects.Text = "Unidades Curriculares";
             this.tabSubjects.UseVisualStyleBackColor = true;
             // 
-            // btnUpdateStudent
-            // 
-            this.btnUpdateStudent.Location = new System.Drawing.Point(143, 306);
-            this.btnUpdateStudent.Name = "btnUpdateStudent";
-            this.btnUpdateStudent.Size = new System.Drawing.Size(75, 23);
-            this.btnUpdateStudent.TabIndex = 19;
-            this.btnUpdateStudent.Text = "Atualizar";
-            this.btnUpdateStudent.UseVisualStyleBackColor = true;
-            this.btnUpdateStudent.Click += new System.EventHandler(this.btnUpdateStudent_Click);
-            // 
-            // btnCancelUpdate
-            // 
-            this.btnCancelUpdate.Location = new System.Drawing.Point(46, 306);
-            this.btnCancelUpdate.Name = "btnCancelUpdate";
-            this.btnCancelUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelUpdate.TabIndex = 20;
-            this.btnCancelUpdate.Text = "Cancelar";
-            this.btnCancelUpdate.UseVisualStyleBackColor = true;
-            this.btnCancelUpdate.Click += new System.EventHandler(this.btnCancelUpdate_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -576,7 +576,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtTeacherPhone;
         private System.Windows.Forms.Button btnUpdateStudent;
-        private System.Windows.Forms.Button btnCancelUpdate;
+        private System.Windows.Forms.Button btnCancelUpdateStudent;
     }
 }
 

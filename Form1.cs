@@ -18,12 +18,14 @@ namespace projectoPOO
 			ToolStripMenuItem windowMenuTeacher = new ToolStripMenuItem("Docentes");
 			ToolStripMenuItem newStudent = new ToolStripMenuItem("Novo Aluno", null, new EventHandler(newStudent_Click));
             ToolStripMenuItem updateStudent = new ToolStripMenuItem("Actualizar Aluno", null, new EventHandler(updateStudent_Click));
+            ToolStripMenuItem showAllStudents = new ToolStripMenuItem("Mostrar todos os Alunos", null, new EventHandler(showAllStudents_Click));
             //	ToolStripMenuItem newTeacher = new ToolStripMenuItem("Novo Professor", null, new EventHandler(windowNewMenu_Click));
             //	ToolStripMenuItem newCourse = new ToolStripMenuItem("Novo Curso", null, new EventHandler(windowNewMenu_Click));
             //	ToolStripMenuItem newSubject = new ToolStripMenuItem("Nova Unidade Curricular", null, new EventHandler(windowNewMenu_Click));
 
             windowMenu.DropDownItems.Add(newStudent);
 			windowMenu.DropDownItems.Add(updateStudent);
+            windowMenu.DropDownItems.Add(showAllStudents);
 			//	windowMenu.DropDownItems.Add(newCourse);
 			//	windowMenu.DropDownItems.Add(newSubject);
 			((ToolStripDropDownMenu)(windowMenu.DropDown)).ShowImageMargin = false;
@@ -61,7 +63,7 @@ namespace projectoPOO
 			txtStudentEmail.ReadOnly = true;
 			txtStudentPhone.ReadOnly = true;
 			btnUpdateStudent.Visible = false;
-            btnCancelUpdate.Visible = false;
+            btnCancelUpdateStudent.Visible = false;
 
 		}
 
@@ -89,7 +91,7 @@ namespace projectoPOO
 		void newStudent_Click(object sender, EventArgs e)
 		{
 			Form2 f = new Form2();
-			f.Text = "Novo Aluno" + this.MdiChildren.Length.ToString();
+			f.Text = "Novo Aluno";
 			f.Show();
 		}
 
@@ -102,7 +104,7 @@ namespace projectoPOO
             txtStudentAddress.ReadOnly = false;
             txtStudentPhone.ReadOnly = false;
 			btnUpdateStudent.Visible = true;
-            btnCancelUpdate.Visible = true;
+            btnCancelUpdateStudent.Visible = true;
         }
 
         private void btnUpdateStudent_Click(object sender, EventArgs e)
@@ -143,14 +145,14 @@ namespace projectoPOO
 
                 // Ocultar botão de atualização
                 btnUpdateStudent.Visible = false;
-                btnCancelUpdate.Visible = false;
+                btnCancelUpdateStudent.Visible = false;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Erro: {ex.Message}", "Erro");
             }
         }
-        private void btnCancelUpdate_Click(object sender, EventArgs e)
+        private void btnCancelUpdateStudent_Click(object sender, EventArgs e)
         {
             txtStudentNumber.ReadOnly = true;
             txtStudentCourse.ReadOnly = true;
@@ -161,8 +163,16 @@ namespace projectoPOO
             txtStudentEmail.ReadOnly = true;
             txtStudentPhone.ReadOnly = true;
             btnUpdateStudent.Visible = false;
-            btnCancelUpdate.Visible = false;
+            btnCancelUpdateStudent.Visible = false;
         }
+
+        void showAllStudents_Click(object sender, EventArgs e)
+        {
+            Form3 a = new Form3();
+            a.Text = "Todos os Alunos";
+            a.Show();
+        }
+
 
         private void btnSearchTeacher_Click(object sender, EventArgs e)
         {
