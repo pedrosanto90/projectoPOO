@@ -20,14 +20,16 @@ namespace projectoPOO
 			newStudent.Birthday = txtAddBirthdateStudent.Value.ToString("yyyy-MM-dd");
 			newStudent.Address = txtAddAddressStudent.Text;
 			newStudent.Phone = txtAddPhoneStudent.Text;
+			newStudent.Course = txtAddCourse.Text;
 
 			Students.AddStudent(newStudent);
+			MessageBox.Show("Aluno inserido com sucesso");
 			this.Close();
 		}
 
-        private void btnCancelAddStudent_Click(object sender, EventArgs e)
-        {
+		private void btnCancelAddStudent_Click(object sender, EventArgs e)
+		{
 			this.Close();
-        }
-    }
+		}
+	}
 }

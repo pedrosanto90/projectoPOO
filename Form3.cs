@@ -38,7 +38,7 @@ namespace projectoPOO
                 foreach (var student in students)
                 {
                     ListViewItem item = new ListViewItem(student.Number);
-                    item.SubItems.Add(student.CourseRef);
+                    item.SubItems.Add(student.Course);
                     item.SubItems.Add(student.Name);
                     item.SubItems.Add(student.LastName);
                     item.SubItems.Add(student.Birthday);
