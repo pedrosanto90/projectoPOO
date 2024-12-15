@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace projectoPOO
@@ -15,6 +8,23 @@ namespace projectoPOO
 		public Form6()
 		{
 			InitializeComponent();
+		}
+
+		private void btnAddCourse_Click(object sender, EventArgs e)
+		{
+			Course newCourse = new Course();
+
+			newCourse.Name = txtAddNameCourse.Text;
+			newCourse.StartDate = txtAddStartDateCourse.Value.ToString("yyyy-MM-dd");
+
+			Courses.AddCourse(newCourse);
+			MessageBox.Show("Curso inserido com sucesso");
+			this.Close();
+		}
+
+		private void btnCancelNewCourse_Click(object sender, EventArgs e)
+		{
+			this.Close();
 		}
 	}
 }

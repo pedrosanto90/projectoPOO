@@ -24,7 +24,9 @@ namespace projectoPOO
 			ToolStripMenuItem newTeacher = new ToolStripMenuItem("Novo Docente", null, new EventHandler(newTeacher_Click));
 			ToolStripMenuItem updateTeacher = new ToolStripMenuItem("Actualizar Docente", null, new EventHandler(updateTeacher_Click));
 			ToolStripMenuItem showAllTeachers = new ToolStripMenuItem("Mostrar todos os Docentes", null, new EventHandler(showAllTeachers_Click));
-			//	ToolStripMenuItem newCourse = new ToolStripMenuItem("Novo Curso", null, new EventHandler(windowNewMenu_Click));
+			ToolStripMenuItem newCourse = new ToolStripMenuItem("Novo Curso", null, new EventHandler(newCourse_Click));
+			ToolStripMenuItem updateCourse = new ToolStripMenuItem("Atualizar Curso", null, new EventHandler(updateCourse_Click));
+			ToolStripMenuItem showAllCourses = new ToolStripMenuItem("Mostrar todos os Cursos", null, new EventHandler(showAllCourses_Click));
 			//	ToolStripMenuItem newSubject = new ToolStripMenuItem("Nova Unidade Curricular", null, new EventHandler(windowNewMenu_Click));
 
 			windowMenu.DropDownItems.Add(newStudent);
@@ -33,6 +35,9 @@ namespace projectoPOO
 			windowMenuTeacher.DropDownItems.Add(newTeacher);
 			windowMenuTeacher.DropDownItems.Add(updateTeacher);
 			windowMenuTeacher.DropDownItems.Add(showAllTeachers);
+			windowMenuCourse.DropDownItems.Add(newCourse);
+			windowMenuCourse.DropDownItems.Add(updateCourse);
+			windowMenuCourse.DropDownItems.Add(showAllCourses);
 
 			((ToolStripDropDownMenu)(windowMenu.DropDown)).ShowImageMargin = false;
 			((ToolStripDropDownMenu)(windowMenu.DropDown)).ShowCheckMargin = true;
@@ -91,6 +96,17 @@ namespace projectoPOO
 
 			btnUpdateTeacher.Visible = false;
 			btnCancelUpdateTeacher.Visible = false;
+
+
+
+			txtCourseRef.ReadOnly = true;
+			txtCourseName.ReadOnly = true;
+			txtCourseAcronym.ReadOnly = true;
+			txtCourseStartDate.ReadOnly = true;
+
+			btnUpdateCourse.Visible = false;
+			btnCancelUpdateCourse.Visible = false;
+			btnDeleteCourse.Visible = false;
 
 		}
 
@@ -375,6 +391,14 @@ namespace projectoPOO
 			txtTeacherSalary.Text = string.Empty;
 
 			btnDeleteTeacher.Visible = false;
+
+			txtSearchCourse.Text = string.Empty;
+			txtCourseRef.Text = string.Empty;
+			txtCourseName.Text = string.Empty;
+			txtCourseAcronym.Text = string.Empty;
+			txtCourseStartDate.Text = string.Empty;
+
+			btnDeleteCourse.Visible = false;
 		}
 
 		private void btnDeleteTeacher_Click(object sender, EventArgs e)
@@ -401,6 +425,126 @@ namespace projectoPOO
 					MessageBox.Show("Erro ao excluir o docente. Verifique se o docente existe.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
+		}
+
+		private void btnSearchCourse_Click(object sender, EventArgs e)
+		{
+			int reference = Int32.Parse(txtSearchCourse.Text);
+			List<Course> course = Courses.GetCourses(reference);
+
+			if (course.Count > 0)
+			{
+				txtCourseRef.Text = course[0].Ref;
+				txtCourseName.Text = course[0].Name;
+				txtCourseAcronym.Text = course[0].Acronym;
+				txtCourseStartDate.Text = course[0].StartDate;
+
+				btnDeleteCourse.Visible = true;
+			}
+			else
+			{
+				MessageBox.Show($"Nenhum curso encontrado com a referência {reference}", "Info");
+			}
+		}
+		void newCourse_Click(object sender, EventArgs e)
+		{
+			Form6 f = new Form6();
+			f.Text = "Novo Curso";
+			f.Show();
+		}
+		void showAllCourses_Click(object sender, EventArgs e)
+		{
+			AllCourses f = new AllCourses();
+			f.Text = "Todos os Cursos";
+			f.Show();
+		}
+		void updateCourse_Click(object sender, EventArgs e)
+		{
+			txtCourseName.ReadOnly = false;
+			txtCourseStartDate.ReadOnly = false;
+
+			btnUpdateCourse.Visible = true;
+			btnCancelUpdateCourse.Visible = true;
+
+		}
+
+		private List<Course> courseInfo()
+		{
+			int reference = Int32.Parse(txtSearchCourse.Text);
+			List<Course> course = Courses.GetCourses(reference);
+
+			txtCourseRef.Text = course[0].Ref;
+			txtCourseName.Text = course[0].Name;
+			txtCourseAcronym.Text = course[0].Acronym;
+			txtCourseStartDate.Text = course[0].StartDate;
+
+			return course;
+
+		}
+		private void btnUpdateCourse_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				// Criar um objeto docente com os dados atualizados
+				Course updatedCourse = new Course
+				{
+					Ref = txtCourseRef.Text,
+					Name = txtCourseName.Text,
+					StartDate = txtCourseStartDate.Text,
+					Acronym = txtCourseAcronym.Text
+				};
+
+				// Atualizar docente no banco
+				bool success = Courses.UpdateCourse(updatedCourse);
+
+				if (success)
+				{
+					MessageBox.Show("Curso atualizado com sucesso!", "Sucesso");
+					courseInfo();
+				}
+				else
+				{
+					MessageBox.Show("Erro ao atualizar o curso. Verifique os dados e tente novamente.", "Erro");
+				}
+
+				// Voltar os campos para somente leitura após atualização
+				txtCourseName.ReadOnly = true;
+				txtCourseStartDate.ReadOnly = true;
+
+				btnUpdateCourse.Visible = false;
+				btnCancelUpdateCourse.Visible = false;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"Erro: {ex.Message}", "Erro");
+			}
+
+		}
+
+		private void btnDeleteCourse_Click(object sender, EventArgs e)
+		{
+			int reference = Int32.Parse(txtCourseRef.Text);
+			var confirmResult = MessageBox.Show(
+					$"Tem certeza de que deseja eliminar o curso?",
+					"Eliminar Curso",
+					MessageBoxButtons.YesNo,
+					MessageBoxIcon.Warning);
+
+			if (confirmResult == DialogResult.Yes)
+			{
+				bool success = Courses.DeleteCourse(reference);
+
+				if (success)
+				{
+					MessageBox.Show("Curso eliminado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					CleanBox();
+				}
+				else
+				{
+					MessageBox.Show("Erro ao excluir o curso. Verifique se o aluno existe.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+			}
+
 		}
 	}
 }
