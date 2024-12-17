@@ -4,11 +4,11 @@ using System.Windows.Forms;
 
 namespace projectoPOO
 {
-	public partial class Form1 : Form
+	public partial class MainScreen : Form
 	{
 		string connection;
 
-		public Form1()
+		public MainScreen()
 		{
 			InitializeComponent();
 
@@ -135,7 +135,7 @@ namespace projectoPOO
 		}
 		void newStudent_Click(object sender, EventArgs e)
 		{
-			Form2 f = new Form2();
+			NewStudent f = new NewStudent();
 			f.Text = "Novo Aluno";
 			f.Show();
 		}
@@ -213,7 +213,7 @@ namespace projectoPOO
 
 		void showAllStudents_Click(object sender, EventArgs e)
 		{
-			Form3 f = new Form3();
+			AllStudents f = new AllStudents();
 			f.Text = "Todos os Alunos";
 			f.Show();
 		}
@@ -255,7 +255,7 @@ namespace projectoPOO
 
 		void newTeacher_Click(object sender, EventArgs e)
 		{
-			Form4 f = new Form4();
+			NewTeacher f = new NewTeacher();
 			f.Text = "Novo Docente";
 			f.Show();
 		}
@@ -337,7 +337,7 @@ namespace projectoPOO
 
 		void showAllTeachers_Click(object sender, EventArgs e)
 		{
-			Form5 f = new Form5();
+			AllTeachers f = new AllTeachers();
 			f.Text = "Todos os Docentes";
 			f.Show();
 		}
@@ -448,7 +448,7 @@ namespace projectoPOO
 		}
 		void newCourse_Click(object sender, EventArgs e)
 		{
-			Form6 f = new Form6();
+			NewCourse f = new NewCourse();
 			f.Text = "Novo Curso";
 			f.Show();
 		}

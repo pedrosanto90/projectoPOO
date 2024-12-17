@@ -1,6 +1,6 @@
 ﻿namespace projectoPOO
 {
-	partial class Form1
+	partial class MainScreen
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -77,6 +77,8 @@
 			this.btnSearchTeacher = new System.Windows.Forms.Button();
 			this.txtSearchTeacher = new System.Windows.Forms.TextBox();
 			this.tabCourses = new System.Windows.Forms.TabPage();
+			this.label9 = new System.Windows.Forms.Label();
+			this.txtCourseStartDate = new System.Windows.Forms.TextBox();
 			this.btnDeleteCourse = new System.Windows.Forms.Button();
 			this.btnCancelUpdateCourse = new System.Windows.Forms.Button();
 			this.btnUpdateCourse = new System.Windows.Forms.Button();
@@ -90,8 +92,6 @@
 			this.btnSearchCourse = new System.Windows.Forms.Button();
 			this.txtSearchCourse = new System.Windows.Forms.TextBox();
 			this.tabSubjects = new System.Windows.Forms.TabPage();
-			this.label9 = new System.Windows.Forms.Label();
-			this.txtCourseStartDate = new System.Windows.Forms.TextBox();
 			this.tabControl1.SuspendLayout();
 			this.tabStudents.SuspendLayout();
 			this.tabTeachers.SuspendLayout();
@@ -578,6 +578,22 @@
 			this.tabCourses.Text = "Cursos";
 			this.tabCourses.UseVisualStyleBackColor = true;
 			// 
+			// label9
+			// 
+			this.label9.AutoSize = true;
+			this.label9.Location = new System.Drawing.Point(594, 127);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(75, 13);
+			this.label9.TabIndex = 64;
+			this.label9.Text = "Data de Inicío";
+			// 
+			// txtCourseStartDate
+			// 
+			this.txtCourseStartDate.Location = new System.Drawing.Point(597, 153);
+			this.txtCourseStartDate.Name = "txtCourseStartDate";
+			this.txtCourseStartDate.Size = new System.Drawing.Size(153, 20);
+			this.txtCourseStartDate.TabIndex = 63;
+			// 
 			// btnDeleteCourse
 			// 
 			this.btnDeleteCourse.Location = new System.Drawing.Point(99, 113);
@@ -691,30 +707,14 @@
 			this.tabSubjects.Text = "Unidades Curriculares";
 			this.tabSubjects.UseVisualStyleBackColor = true;
 			// 
-			// label9
-			// 
-			this.label9.AutoSize = true;
-			this.label9.Location = new System.Drawing.Point(594, 127);
-			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(75, 13);
-			this.label9.TabIndex = 64;
-			this.label9.Text = "Data de Inicío";
-			// 
-			// txtCourseStartDate
-			// 
-			this.txtCourseStartDate.Location = new System.Drawing.Point(597, 153);
-			this.txtCourseStartDate.Name = "txtCourseStartDate";
-			this.txtCourseStartDate.Size = new System.Drawing.Size(153, 20);
-			this.txtCourseStartDate.TabIndex = 63;
-			// 
-			// Form1
+			// MainScreen
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
 			this.Controls.Add(this.tabControl1);
 			this.Controls.Add(this.lbl_conn);
-			this.Name = "Form1";
+			this.Name = "MainScreen";
 			this.Text = "Gestão Escolar";
 			this.tabControl1.ResumeLayout(false);
 			this.tabStudents.ResumeLayout(false);

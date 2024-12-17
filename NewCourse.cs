@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace projectoPOO
 {
-	public partial class Form6 : Form
+	public partial class NewCourse : Form
 	{
-		public Form6()
+		public NewCourse()
 		{
 			InitializeComponent();
 		}

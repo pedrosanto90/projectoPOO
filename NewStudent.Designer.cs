@@ -1,6 +1,6 @@
 ﻿namespace projectoPOO
 {
-	partial class Form2
+	partial class NewStudent
 	{
 		/// <summary>
 		/// Required designer variable.

@@ -1,6 +1,6 @@
 ﻿namespace projectoPOO
 {
-    partial class Form5
+    partial class AllStudents
     {
         /// <summary>
         /// Required designer variable.
@@ -28,33 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lvTeachers = new System.Windows.Forms.ListView();
+            this.lvStudents = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
-            // lvTeachers
+            // lvStudents
             // 
-            this.lvTeachers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvTeachers.HideSelection = false;
-            this.lvTeachers.Location = new System.Drawing.Point(0, 0);
-            this.lvTeachers.Name = "lvTeachers";
-            this.lvTeachers.Size = new System.Drawing.Size(739, 391);
-            this.lvTeachers.TabIndex = 0;
-            this.lvTeachers.UseCompatibleStateImageBehavior = false;
+            this.lvStudents.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvStudents.HideSelection = false;
+            this.lvStudents.Location = new System.Drawing.Point(0, 0);
+            this.lvStudents.Name = "lvStudents";
+            this.lvStudents.Size = new System.Drawing.Size(748, 402);
+            this.lvStudents.TabIndex = 0;
+            this.lvStudents.UseCompatibleStateImageBehavior = false;
             // 
-            // Form5
+            // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(739, 391);
-            this.Controls.Add(this.lvTeachers);
-            this.Name = "Form5";
-            this.Text = "Form5";
+            this.ClientSize = new System.Drawing.Size(748, 402);
+            this.Controls.Add(this.lvStudents);
+            this.Name = "Form3";
+            this.Text = "Form3";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListView lvTeachers;
+        private System.Windows.Forms.ListView lvStudents;
     }
 }

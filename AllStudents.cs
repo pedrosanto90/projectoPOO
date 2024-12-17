@@ -4,9 +4,9 @@ using System.Windows.Forms;
 
 namespace projectoPOO
 {
-    public partial class Form3 : Form
+    public partial class AllStudents : Form
     {
-        public Form3()
+        public AllStudents()
         {
             InitializeComponent();
             LoadAllStudents();
