@@ -92,10 +92,33 @@
 			this.btnSearchCourse = new System.Windows.Forms.Button();
 			this.txtSearchCourse = new System.Windows.Forms.TextBox();
 			this.tabSubjects = new System.Windows.Forms.TabPage();
+			this.label11 = new System.Windows.Forms.Label();
+			this.label12 = new System.Windows.Forms.Label();
+			this.label14 = new System.Windows.Forms.Label();
+			this.label15 = new System.Windows.Forms.Label();
+			this.label19 = new System.Windows.Forms.Label();
+			this.label20 = new System.Windows.Forms.Label();
+			this.label21 = new System.Windows.Forms.Label();
+			this.label22 = new System.Windows.Forms.Label();
+			this.txtSearchSubject = new System.Windows.Forms.TextBox();
+			this.txtSubjectSemester = new System.Windows.Forms.TextBox();
+			this.txtSubjectAcronym = new System.Windows.Forms.TextBox();
+			this.txtSubjectCourse = new System.Windows.Forms.TextBox();
+			this.txtSubjectCredits = new System.Windows.Forms.TextBox();
+			this.txtSubjectYear = new System.Windows.Forms.TextBox();
+			this.txtSubjectTeacher = new System.Windows.Forms.TextBox();
+			this.txtSubjectNumber = new System.Windows.Forms.TextBox();
+			this.btnDeleteSubject = new System.Windows.Forms.Button();
+			this.btnCancelUpdateSubject = new System.Windows.Forms.Button();
+			this.btnUpdateSubject = new System.Windows.Forms.Button();
+			this.btnSearchSubject = new System.Windows.Forms.Button();
+			this.label23 = new System.Windows.Forms.Label();
+			this.txtSubjectName = new System.Windows.Forms.TextBox();
 			this.tabControl1.SuspendLayout();
 			this.tabStudents.SuspendLayout();
 			this.tabTeachers.SuspendLayout();
 			this.tabCourses.SuspendLayout();
+			this.tabSubjects.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// lbl_conn
@@ -699,6 +722,28 @@
 			// 
 			// tabSubjects
 			// 
+			this.tabSubjects.Controls.Add(this.label23);
+			this.tabSubjects.Controls.Add(this.txtSubjectName);
+			this.tabSubjects.Controls.Add(this.btnDeleteSubject);
+			this.tabSubjects.Controls.Add(this.btnCancelUpdateSubject);
+			this.tabSubjects.Controls.Add(this.btnUpdateSubject);
+			this.tabSubjects.Controls.Add(this.btnSearchSubject);
+			this.tabSubjects.Controls.Add(this.label11);
+			this.tabSubjects.Controls.Add(this.label12);
+			this.tabSubjects.Controls.Add(this.label14);
+			this.tabSubjects.Controls.Add(this.label15);
+			this.tabSubjects.Controls.Add(this.label19);
+			this.tabSubjects.Controls.Add(this.label20);
+			this.tabSubjects.Controls.Add(this.label21);
+			this.tabSubjects.Controls.Add(this.label22);
+			this.tabSubjects.Controls.Add(this.txtSearchSubject);
+			this.tabSubjects.Controls.Add(this.txtSubjectSemester);
+			this.tabSubjects.Controls.Add(this.txtSubjectAcronym);
+			this.tabSubjects.Controls.Add(this.txtSubjectCourse);
+			this.tabSubjects.Controls.Add(this.txtSubjectCredits);
+			this.tabSubjects.Controls.Add(this.txtSubjectYear);
+			this.tabSubjects.Controls.Add(this.txtSubjectTeacher);
+			this.tabSubjects.Controls.Add(this.txtSubjectNumber);
 			this.tabSubjects.Location = new System.Drawing.Point(4, 22);
 			this.tabSubjects.Name = "tabSubjects";
 			this.tabSubjects.Padding = new System.Windows.Forms.Padding(3);
@@ -706,6 +751,188 @@
 			this.tabSubjects.TabIndex = 3;
 			this.tabSubjects.Text = "Unidades Curriculares";
 			this.tabSubjects.UseVisualStyleBackColor = true;
+			// 
+			// label11
+			// 
+			this.label11.AutoSize = true;
+			this.label11.Location = new System.Drawing.Point(28, 33);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(96, 13);
+			this.label11.TabIndex = 34;
+			this.label11.Text = "Pesquisar Unidade";
+			// 
+			// label12
+			// 
+			this.label12.AutoSize = true;
+			this.label12.Location = new System.Drawing.Point(546, 253);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(51, 13);
+			this.label12.TabIndex = 33;
+			this.label12.Text = "Semestre";
+			// 
+			// label14
+			// 
+			this.label14.AutoSize = true;
+			this.label14.Location = new System.Drawing.Point(546, 117);
+			this.label14.Name = "label14";
+			this.label14.Size = new System.Drawing.Size(30, 13);
+			this.label14.TabIndex = 32;
+			this.label14.Text = "Sigla";
+			// 
+			// label15
+			// 
+			this.label15.AutoSize = true;
+			this.label15.Location = new System.Drawing.Point(546, 33);
+			this.label15.Name = "label15";
+			this.label15.Size = new System.Drawing.Size(34, 13);
+			this.label15.TabIndex = 31;
+			this.label15.Text = "Curso";
+			// 
+			// label19
+			// 
+			this.label19.AutoSize = true;
+			this.label19.Location = new System.Drawing.Point(340, 254);
+			this.label19.Name = "label19";
+			this.label19.Size = new System.Drawing.Size(45, 13);
+			this.label19.TabIndex = 30;
+			this.label19.Text = "Créditos";
+			// 
+			// label20
+			// 
+			this.label20.AutoSize = true;
+			this.label20.Location = new System.Drawing.Point(546, 189);
+			this.label20.Name = "label20";
+			this.label20.Size = new System.Drawing.Size(26, 13);
+			this.label20.TabIndex = 29;
+			this.label20.Text = "Ano";
+			// 
+			// label21
+			// 
+			this.label21.AutoSize = true;
+			this.label21.Location = new System.Drawing.Point(337, 189);
+			this.label21.Name = "label21";
+			this.label21.Size = new System.Drawing.Size(48, 13);
+			this.label21.TabIndex = 28;
+			this.label21.Text = "Docente";
+			// 
+			// label22
+			// 
+			this.label22.AutoSize = true;
+			this.label22.Location = new System.Drawing.Point(337, 33);
+			this.label22.Name = "label22";
+			this.label22.Size = new System.Drawing.Size(44, 13);
+			this.label22.TabIndex = 27;
+			this.label22.Text = "Número";
+			// 
+			// txtSearchSubject
+			// 
+			this.txtSearchSubject.Location = new System.Drawing.Point(31, 60);
+			this.txtSearchSubject.Name = "txtSearchSubject";
+			this.txtSearchSubject.Size = new System.Drawing.Size(146, 20);
+			this.txtSearchSubject.TabIndex = 26;
+			// 
+			// txtSubjectSemester
+			// 
+			this.txtSubjectSemester.Location = new System.Drawing.Point(549, 279);
+			this.txtSubjectSemester.Name = "txtSubjectSemester";
+			this.txtSubjectSemester.Size = new System.Drawing.Size(146, 20);
+			this.txtSubjectSemester.TabIndex = 25;
+			// 
+			// txtSubjectAcronym
+			// 
+			this.txtSubjectAcronym.Location = new System.Drawing.Point(549, 142);
+			this.txtSubjectAcronym.Name = "txtSubjectAcronym";
+			this.txtSubjectAcronym.Size = new System.Drawing.Size(146, 20);
+			this.txtSubjectAcronym.TabIndex = 24;
+			// 
+			// txtSubjectCourse
+			// 
+			this.txtSubjectCourse.Location = new System.Drawing.Point(549, 60);
+			this.txtSubjectCourse.Name = "txtSubjectCourse";
+			this.txtSubjectCourse.Size = new System.Drawing.Size(146, 20);
+			this.txtSubjectCourse.TabIndex = 23;
+			// 
+			// txtSubjectCredits
+			// 
+			this.txtSubjectCredits.Location = new System.Drawing.Point(340, 279);
+			this.txtSubjectCredits.Name = "txtSubjectCredits";
+			this.txtSubjectCredits.Size = new System.Drawing.Size(153, 20);
+			this.txtSubjectCredits.TabIndex = 22;
+			// 
+			// txtSubjectYear
+			// 
+			this.txtSubjectYear.Location = new System.Drawing.Point(549, 215);
+			this.txtSubjectYear.Name = "txtSubjectYear";
+			this.txtSubjectYear.Size = new System.Drawing.Size(146, 20);
+			this.txtSubjectYear.TabIndex = 21;
+			// 
+			// txtSubjectTeacher
+			// 
+			this.txtSubjectTeacher.Location = new System.Drawing.Point(340, 215);
+			this.txtSubjectTeacher.Name = "txtSubjectTeacher";
+			this.txtSubjectTeacher.Size = new System.Drawing.Size(153, 20);
+			this.txtSubjectTeacher.TabIndex = 20;
+			// 
+			// txtSubjectNumber
+			// 
+			this.txtSubjectNumber.Location = new System.Drawing.Point(340, 60);
+			this.txtSubjectNumber.Name = "txtSubjectNumber";
+			this.txtSubjectNumber.Size = new System.Drawing.Size(153, 20);
+			this.txtSubjectNumber.TabIndex = 19;
+			// 
+			// btnDeleteSubject
+			// 
+			this.btnDeleteSubject.Location = new System.Drawing.Point(109, 107);
+			this.btnDeleteSubject.Name = "btnDeleteSubject";
+			this.btnDeleteSubject.Size = new System.Drawing.Size(113, 23);
+			this.btnDeleteSubject.TabIndex = 66;
+			this.btnDeleteSubject.Text = "Eliminar Curso";
+			this.btnDeleteSubject.UseVisualStyleBackColor = true;
+			// 
+			// btnCancelUpdateSubject
+			// 
+			this.btnCancelUpdateSubject.Location = new System.Drawing.Point(63, 337);
+			this.btnCancelUpdateSubject.Name = "btnCancelUpdateSubject";
+			this.btnCancelUpdateSubject.Size = new System.Drawing.Size(75, 23);
+			this.btnCancelUpdateSubject.TabIndex = 65;
+			this.btnCancelUpdateSubject.Text = "Cancelar";
+			this.btnCancelUpdateSubject.UseVisualStyleBackColor = true;
+			// 
+			// btnUpdateSubject
+			// 
+			this.btnUpdateSubject.Location = new System.Drawing.Point(160, 337);
+			this.btnUpdateSubject.Name = "btnUpdateSubject";
+			this.btnUpdateSubject.Size = new System.Drawing.Size(75, 23);
+			this.btnUpdateSubject.TabIndex = 64;
+			this.btnUpdateSubject.Text = "Atualizar";
+			this.btnUpdateSubject.UseVisualStyleBackColor = true;
+			this.btnUpdateSubject.Click += new System.EventHandler(this.btnUpdateSubject_Click);
+			// 
+			// btnSearchSubject
+			// 
+			this.btnSearchSubject.Location = new System.Drawing.Point(206, 60);
+			this.btnSearchSubject.Name = "btnSearchSubject";
+			this.btnSearchSubject.Size = new System.Drawing.Size(75, 23);
+			this.btnSearchSubject.TabIndex = 63;
+			this.btnSearchSubject.Text = "Pesquisar Docente";
+			this.btnSearchSubject.UseVisualStyleBackColor = true;
+			this.btnSearchSubject.Click += new System.EventHandler(this.btnSearchSubject_Click);
+			// 
+			// label23
+			// 
+			this.label23.AutoSize = true;
+			this.label23.Location = new System.Drawing.Point(337, 116);
+			this.label23.Name = "label23";
+			this.label23.Size = new System.Drawing.Size(35, 13);
+			this.label23.TabIndex = 68;
+			this.label23.Text = "Nome";
+			// 
+			// txtSubjectName
+			// 
+			this.txtSubjectName.Location = new System.Drawing.Point(340, 142);
+			this.txtSubjectName.Name = "txtSubjectName";
+			this.txtSubjectName.Size = new System.Drawing.Size(153, 20);
+			this.txtSubjectName.TabIndex = 67;
 			// 
 			// MainScreen
 			// 
@@ -723,6 +950,8 @@
 			this.tabTeachers.PerformLayout();
 			this.tabCourses.ResumeLayout(false);
 			this.tabCourses.PerformLayout();
+			this.tabSubjects.ResumeLayout(false);
+			this.tabSubjects.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -793,6 +1022,28 @@
 		private System.Windows.Forms.TextBox txtSearchCourse;
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.TextBox txtCourseStartDate;
+		private System.Windows.Forms.Label label11;
+		private System.Windows.Forms.Label label12;
+		private System.Windows.Forms.Label label14;
+		private System.Windows.Forms.Label label15;
+		private System.Windows.Forms.Label label19;
+		private System.Windows.Forms.Label label20;
+		private System.Windows.Forms.Label label21;
+		private System.Windows.Forms.Label label22;
+		private System.Windows.Forms.TextBox txtSearchSubject;
+		private System.Windows.Forms.TextBox txtSubjectSemester;
+		private System.Windows.Forms.TextBox txtSubjectAcronym;
+		private System.Windows.Forms.TextBox txtSubjectCourse;
+		private System.Windows.Forms.TextBox txtSubjectCredits;
+		private System.Windows.Forms.TextBox txtSubjectYear;
+		private System.Windows.Forms.TextBox txtSubjectTeacher;
+		private System.Windows.Forms.TextBox txtSubjectNumber;
+		private System.Windows.Forms.Button btnDeleteSubject;
+		private System.Windows.Forms.Button btnCancelUpdateSubject;
+		private System.Windows.Forms.Button btnUpdateSubject;
+		private System.Windows.Forms.Button btnSearchSubject;
+		private System.Windows.Forms.Label label23;
+		private System.Windows.Forms.TextBox txtSubjectName;
 	}
 }
 

@@ -14,43 +14,52 @@ namespace projectoPOO
 
 			// Create a MenuStrip control with a new window.
 			MenuStrip ms = new MenuStrip();
-			ToolStripMenuItem windowMenu = new ToolStripMenuItem("Aluno");
+			ToolStripMenuItem windowMenuFile = new ToolStripMenuItem("Ficheiro");
+			ToolStripMenuItem windowMenuStudent = new ToolStripMenuItem("Aluno");
 			ToolStripMenuItem windowMenuTeacher = new ToolStripMenuItem("Docentes");
 			ToolStripMenuItem windowMenuCourse = new ToolStripMenuItem("Cursos");
 			ToolStripMenuItem windowMenuSubject = new ToolStripMenuItem("Unidade Curricular");
+			ToolStripMenuItem windowMenuHelp = new ToolStripMenuItem("Ajuda");
+
 			ToolStripMenuItem newStudent = new ToolStripMenuItem("Novo Aluno", null, new EventHandler(newStudent_Click));
 			ToolStripMenuItem updateStudent = new ToolStripMenuItem("Actualizar Aluno", null, new EventHandler(updateStudent_Click));
 			ToolStripMenuItem showAllStudents = new ToolStripMenuItem("Mostrar todos os Alunos", null, new EventHandler(showAllStudents_Click));
+
 			ToolStripMenuItem newTeacher = new ToolStripMenuItem("Novo Docente", null, new EventHandler(newTeacher_Click));
 			ToolStripMenuItem updateTeacher = new ToolStripMenuItem("Actualizar Docente", null, new EventHandler(updateTeacher_Click));
 			ToolStripMenuItem showAllTeachers = new ToolStripMenuItem("Mostrar todos os Docentes", null, new EventHandler(showAllTeachers_Click));
+
 			ToolStripMenuItem newCourse = new ToolStripMenuItem("Novo Curso", null, new EventHandler(newCourse_Click));
 			ToolStripMenuItem updateCourse = new ToolStripMenuItem("Atualizar Curso", null, new EventHandler(updateCourse_Click));
 			ToolStripMenuItem showAllCourses = new ToolStripMenuItem("Mostrar todos os Cursos", null, new EventHandler(showAllCourses_Click));
-			//	ToolStripMenuItem newSubject = new ToolStripMenuItem("Nova Unidade Curricular", null, new EventHandler(windowNewMenu_Click));
 
-			windowMenu.DropDownItems.Add(newStudent);
-			windowMenu.DropDownItems.Add(updateStudent);
-			windowMenu.DropDownItems.Add(showAllStudents);
+			ToolStripMenuItem upadateSubjects = new ToolStripMenuItem("Atualizar Unidade Curricular ", null, new EventHandler(updateSubjects_Click));
+			ToolStripMenuItem showAllSubjects = new ToolStripMenuItem("Mostrar todas as Unidades Curriculares ", null, new EventHandler(showAllSubjects_Click));
+
+			windowMenuStudent.DropDownItems.Add(newStudent);
+			windowMenuStudent.DropDownItems.Add(updateStudent);
+			windowMenuStudent.DropDownItems.Add(showAllStudents);
+
 			windowMenuTeacher.DropDownItems.Add(newTeacher);
 			windowMenuTeacher.DropDownItems.Add(updateTeacher);
 			windowMenuTeacher.DropDownItems.Add(showAllTeachers);
+
 			windowMenuCourse.DropDownItems.Add(newCourse);
 			windowMenuCourse.DropDownItems.Add(updateCourse);
 			windowMenuCourse.DropDownItems.Add(showAllCourses);
 
-			((ToolStripDropDownMenu)(windowMenu.DropDown)).ShowImageMargin = false;
-			((ToolStripDropDownMenu)(windowMenu.DropDown)).ShowCheckMargin = true;
+			windowMenuSubject.DropDownItems.Add(upadateSubjects);
+			windowMenuSubject.DropDownItems.Add(showAllSubjects);
 
 			// Assign the ToolStripMenuItem that displays 
 			// the list of child forms.
-			ms.MdiWindowListItem = windowMenu;
+			ms.MdiWindowListItem = windowMenuStudent;
 			ms.MdiWindowListItem = windowMenuTeacher;
 			ms.MdiWindowListItem = windowMenuCourse;
 			ms.MdiWindowListItem = windowMenuSubject;
 
 			// Add the window ToolStripMenuItem to the MenuStrip.
-			ms.Items.Add(windowMenu);
+			ms.Items.Add(windowMenuStudent);
 			ms.Items.Add(windowMenuTeacher);
 			ms.Items.Add(windowMenuCourse);
 			ms.Items.Add(windowMenuSubject);
@@ -97,8 +106,6 @@ namespace projectoPOO
 			btnUpdateTeacher.Visible = false;
 			btnCancelUpdateTeacher.Visible = false;
 
-
-
 			txtCourseRef.ReadOnly = true;
 			txtCourseName.ReadOnly = true;
 			txtCourseAcronym.ReadOnly = true;
@@ -107,6 +114,19 @@ namespace projectoPOO
 			btnUpdateCourse.Visible = false;
 			btnCancelUpdateCourse.Visible = false;
 			btnDeleteCourse.Visible = false;
+
+			txtSubjectAcronym.ReadOnly = true;
+			txtSubjectNumber.ReadOnly = true;
+			txtSubjectCourse.ReadOnly = true;
+			txtSubjectName.ReadOnly = true;
+			txtSubjectCredits.ReadOnly = true;
+			txtSubjectYear.ReadOnly = true;
+			txtSubjectSemester.ReadOnly = true;
+			txtSubjectTeacher.ReadOnly = true;
+
+			btnUpdateSubject.Visible = false;
+			btnCancelUpdateSubject.Visible = false;
+			btnDeleteSubject.Visible = false;
 
 		}
 
@@ -545,6 +565,90 @@ namespace projectoPOO
 				}
 			}
 
+		}
+		void showAllSubjects_Click(object sender, EventArgs e)
+		{
+			AllSubjects f = new AllSubjects();
+			f.Text = "Todas as Unidades Curriculares";
+			f.Show();
+		}
+
+		void updateSubjects_Click(object sender, EventArgs e)
+		{
+			txtSubjectTeacher.ReadOnly = false;
+			txtSubjectCredits.ReadOnly = false;
+
+			btnUpdateSubject.Visible = true;
+			btnCancelUpdateSubject.Visible = true;
+		}
+
+
+		private void btnSearchSubject_Click(object sender, EventArgs e)
+		{
+			int subjectId = Int32.Parse(txtSearchSubject.Text);
+			List<Subject> subject = Subjects.GetSubject(subjectId);
+
+			if (subject.Count > 0)
+			{
+				txtSubjectNumber.Text = subject[0].Id;
+				txtSubjectCourse.Text = subject[0].Course;
+				txtSubjectTeacher.Text = subject[0].Teacher;
+				txtSubjectName.Text = subject[0].Name;
+				txtSubjectAcronym.Text = subject[0].Acronym;
+				txtSubjectYear.Text = subject[0].Year;
+				txtSubjectSemester.Text = subject[0].Semester;
+				txtSubjectCredits.Text = subject[0].Credits;
+
+				btnDeleteSubject.Visible = true;
+			}
+			else
+			{
+				MessageBox.Show($"Nenhuma UC encontrada com a referência {subjectId}", "Info");
+			}
+		}
+
+		private void btnUpdateSubject_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				// Criar um objeto docente com os dados atualizados
+				Subject updatedSubject = new Subject
+				{
+
+					Id = txtSubjectNumber.Text,
+					Course = txtSubjectCourse.Text,
+					Teacher = txtSubjectTeacher.Text,
+					Name = txtSubjectName.Text,
+					Acronym = txtSubjectAcronym.Text,
+					Year = txtSubjectYear.Text,
+					Semester = txtSubjectSemester.Text,
+					Credits = txtSubjectCredits.Text
+				};
+
+				// Atualizar docente no banco
+				bool success = Subjects.UpdateSubject(updatedSubject);
+
+				if (success)
+				{
+					MessageBox.Show("UC atualizado com sucesso!", "Sucesso");
+					courseInfo();
+				}
+				else
+				{
+					MessageBox.Show("Erro ao atualizar UC. Verifique os dados e tente novamente.", "Erro");
+				}
+
+				// Voltar os campos para somente leitura após atualização
+				txtSubjectTeacher.ReadOnly = true;
+				txtSubjectCredits.ReadOnly = true;
+
+				btnUpdateSubject.Visible = false;
+				btnCancelUpdateSubject.Visible = false;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"Erro: {ex.Message}", "Erro");
+			}
 		}
 	}
 }
