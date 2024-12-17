@@ -20,10 +20,9 @@ namespace projectoPOO
 	{
 		public static List<Student> GetStudents(int numero)
 		{
-			string connectionString = "Data Source=(local); User ID=joao; Initial Catalog=escoladb; Integrated Security=True;";
 			List<Student> students = new List<Student>();
 
-			using (SqlConnection cn = new SqlConnection(connectionString))
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
 			{
 				cn.Open();
 
@@ -58,9 +57,8 @@ namespace projectoPOO
 
 		public static bool AddStudent(Student student)
 		{
-			string connectionString = "Data Source=(local); User ID=joao; Initial Catalog=EscolaDB; Integrated Security=True;";
 
-			using (SqlConnection cn = new SqlConnection(connectionString))
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
 			{
 				cn.Open();
 
@@ -116,9 +114,7 @@ WHERE Curso.sigla = @referenciaCurso";
 
 		public static bool UpdateStudent(Student student)
 		{
-			string connectionString = "Data Source=(local); User ID=joao; Initial Catalog=EscolaDB; Integrated Security=True;";
-
-			using (SqlConnection cn = new SqlConnection(connectionString))
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
 			{
 				cn.Open();
 
@@ -151,10 +147,9 @@ WHERE Curso.sigla = @referenciaCurso";
 
 		public static List<Student> GetAllStudents()
 		{
-			string connectionString = "Data Source=(local); User ID=joao; Initial Catalog=EscolaDB; Integrated Security=True;";
 			List<Student> allStudents = new List<Student>();
 
-			using (SqlConnection cn = new SqlConnection(connectionString))
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
 			{
 				cn.Open();
 
@@ -186,10 +181,7 @@ WHERE Curso.sigla = @referenciaCurso";
 		}
 		public static bool DeleteStudent(int numero)
 		{
-
-			string connectionString = "Data Source=(local); User ID=pedro; Initial Catalog=EscolaDB; Integrated Security=True;";
-
-			using (SqlConnection cn = new SqlConnection(connectionString))
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
 			{
 				cn.Open();
 

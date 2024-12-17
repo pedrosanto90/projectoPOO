@@ -14,14 +14,17 @@ struct Course
 
 namespace projectoPOO
 {
+
 	internal class Courses
 	{
+
+
 		public static List<Course> GetCourses(int referencia)
 		{
-			string connectionString = "Data Source=(local); User ID=pedro; Initial Catalog=escoladb; Integrated Security=True;";
+
 			List<Course> courses = new List<Course>();
 
-			using (SqlConnection cn = new SqlConnection(connectionString))
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
 			{
 				cn.Open();
 
@@ -51,9 +54,8 @@ namespace projectoPOO
 		}
 		public static bool AddCourse(Course course)
 		{
-			string connectionString = "Data Source=(local); User ID=pedro; Initial Catalog=EscolaDB; Integrated Security=True;";
 
-			using (SqlConnection cn = new SqlConnection(connectionString))
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
 			{
 				cn.Open();
 
@@ -98,12 +100,12 @@ namespace projectoPOO
 		}
 		public static bool UpdateCourse(Course course)
 		{
-			string connectionString = "Data Source=(local); User ID=pedro; Initial Catalog=EscolaDB; Integrated Security=True;";
+
 			string courseName = course.Name;
 			string courseAcronym = new string(courseName.Where(char.IsUpper).ToArray());
 
 
-			using (SqlConnection cn = new SqlConnection(connectionString))
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
 			{
 				cn.Open();
 
@@ -130,13 +132,9 @@ namespace projectoPOO
 
 		public static List<Course> GetAllCourses()
 		{
-
-			string connectionString = "Data Source=(local); User ID=pedro; Initial Catalog=EscolaDB; Integrated Security=True;";
 			List<Course> allCourses = new List<Course>();
 
-
-
-			using (SqlConnection cn = new SqlConnection(connectionString))
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
 			{
 				cn.Open();
 
@@ -167,10 +165,7 @@ namespace projectoPOO
 
 		public static bool DeleteCourse(int referencia)
 		{
-
-			string connectionString = "Data Source=(local); User ID=pedro; Initial Catalog=EscolaDB; Integrated Security=True;";
-
-			using (SqlConnection cn = new SqlConnection(connectionString))
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
 			{
 				cn.Open();
 

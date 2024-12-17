@@ -18,6 +18,7 @@ namespace projectoPOO
 				// Obter a lista de todos os alunos
 				List<Course> courses = Courses.GetAllCourses();
 
+
 				// Configure o ListView
 				lvCourses.View = View.Details; // Exibição em detalhes com colunas
 				lvCourses.FullRowSelect = true; // Permite selecionar a linha inteira

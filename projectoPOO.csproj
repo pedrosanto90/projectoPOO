@@ -104,6 +104,7 @@
     <Compile Include="AllCourses.Designer.cs">
       <DependentUpon>AllCourses.cs</DependentUpon>
     </Compile>
+    <Compile Include="Connection.cs" />
     <Compile Include="Courses.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

@@ -22,10 +22,10 @@ namespace projectoPOO
 	{
 		public static List<Teacher> GetTeachers(int numero)
 		{
-			string connectionString = "Data Source=(local); User ID=joao; Initial Catalog=escoladb; Integrated Security=True;";
+
 			List<Teacher> teachers = new List<Teacher>();
 
-			using (SqlConnection cn = new SqlConnection(connectionString))
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
 			{
 				cn.Open();
 
@@ -70,9 +70,9 @@ namespace projectoPOO
 
 		public static bool AddTeacher(Teacher teacher)
 		{
-			string connectionString = "Data Source=(local); User ID=joao; Initial Catalog=EscolaDB; Integrated Security=True;";
 
-			using (SqlConnection cn = new SqlConnection(connectionString))
+
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
 			{
 				cn.Open();
 
@@ -120,9 +120,7 @@ namespace projectoPOO
 
 		public static bool UpdateTeacher(Teacher teacher)
 		{
-			string connectionString = "Data Source=(local); User ID=joao; Initial Catalog=EscolaDB; Integrated Security=True;";
-
-			using (SqlConnection cn = new SqlConnection(connectionString))
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
 			{
 				cn.Open();
 				// Gerar o e-mail com o primeiro nome e o apelido em letras minúsculas e sem acentos
@@ -158,10 +156,9 @@ namespace projectoPOO
 
 		public static List<Teacher> GetAllTeachers()
 		{
-			string connectionString = "Data Source=(local); User ID=joao; Initial Catalog=EscolaDB; Integrated Security=True;";
 			List<Teacher> allTeachers = new List<Teacher>();
 
-			using (SqlConnection cn = new SqlConnection(connectionString))
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
 			{
 				cn.Open();
 
@@ -193,10 +190,7 @@ namespace projectoPOO
 		}
 		public static bool DeleteTeacher(int numero)
 		{
-
-			string connectionString = "Data Source=(local); User ID=pedro; Initial Catalog=EscolaDB; Integrated Security=True;";
-
-			using (SqlConnection cn = new SqlConnection(connectionString))
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
 			{
 				cn.Open();
 
