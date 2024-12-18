@@ -113,11 +113,12 @@
     <Compile Include="CloseProgram.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="Courses.cs" />
-    <Compile Include="Enroll.cs">
+    <Compile Include="Enrollment.cs" />
+    <Compile Include="GiveScores.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Enroll.Designer.cs">
-      <DependentUpon>Enroll.cs</DependentUpon>
+    <Compile Include="GiveScores.Designer.cs">
+      <DependentUpon>GiveScores.cs</DependentUpon>
     </Compile>
     <Compile Include="MainScreen.cs">
       <SubType>Form</SubType>
@@ -173,8 +174,8 @@
     <EmbeddedResource Include="AllSubjects.resx">
       <DependentUpon>AllSubjects.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Enroll.resx">
-      <DependentUpon>Enroll.cs</DependentUpon>
+    <EmbeddedResource Include="GiveScores.resx">
+      <DependentUpon>GiveScores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainScreen.resx">
       <DependentUpon>MainScreen.cs</DependentUpon>

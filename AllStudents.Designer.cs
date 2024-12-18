@@ -28,33 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lvStudents = new System.Windows.Forms.ListView();
+            this.dgAllStudents = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgAllStudents)).BeginInit();
             this.SuspendLayout();
             // 
-            // lvStudents
+            // dgAllStudents
             // 
-            this.lvStudents.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvStudents.HideSelection = false;
-            this.lvStudents.Location = new System.Drawing.Point(0, 0);
-            this.lvStudents.Name = "lvStudents";
-            this.lvStudents.Size = new System.Drawing.Size(748, 402);
-            this.lvStudents.TabIndex = 0;
-            this.lvStudents.UseCompatibleStateImageBehavior = false;
+            this.dgAllStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgAllStudents.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgAllStudents.Location = new System.Drawing.Point(0, 0);
+            this.dgAllStudents.Name = "dgAllStudents";
+            this.dgAllStudents.Size = new System.Drawing.Size(748, 402);
+            this.dgAllStudents.TabIndex = 0;
             // 
-            // Form3
+            // AllStudents
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(748, 402);
-            this.Controls.Add(this.lvStudents);
-            this.Name = "Form3";
+            this.Controls.Add(this.dgAllStudents);
+            this.Name = "AllStudents";
             this.Text = "Form3";
+            ((System.ComponentModel.ISupportInitialize)(this.dgAllStudents)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListView lvStudents;
+        private System.Windows.Forms.DataGridView dgAllStudents;
     }
 }

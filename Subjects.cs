@@ -17,6 +17,7 @@ struct Subject
 	public string Year; // Join AnoLectivo 
 	public string Semester;
 };
+
 namespace projectoPOO
 {
 	internal class Subjects
@@ -229,5 +230,5 @@ namespace projectoPOO
 
 			}
 		}
-	}
+    }
 }

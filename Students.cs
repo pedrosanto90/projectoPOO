@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 struct Student
 {
 	public string Number;
@@ -145,7 +147,7 @@ WHERE Curso.sigla = @referenciaCurso";
 			}
 		}
 
-		public static List<Student> GetAllStudents()
+		public static DataTable GetAllStudents()
 		{
 			List<Student> allStudents = new List<Student>();
 
@@ -155,29 +157,27 @@ WHERE Curso.sigla = @referenciaCurso";
 
 				string query = @"SELECT numero, referenciaCurso, nomeProprio, apelido, dataNascimento, morada, email, telefone FROM Aluno";
 
-				using (SqlCommand cmd = new SqlCommand(query, cn))
-				{
-					using (SqlDataReader reader = cmd.ExecuteReader())
-					{
-						while (reader.Read())
-						{
-							Student student = new Student
-							{
-								Number = reader["numero"].ToString(),
-								Course = reader["referenciaCurso"].ToString(),
-								Name = reader["nomeProprio"].ToString(),
-								LastName = reader["apelido"].ToString(),
-								Birthday = reader["dataNascimento"].ToString(),
-								Address = reader["morada"].ToString(),
-								Email = reader["email"].ToString(),
-								Phone = reader["telefone"].ToString()
-							};
-							allStudents.Add(student);
-						}
-					}
-				}
-			}
-			return allStudents;
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                {
+                    using (SqlConnection connection = new SqlConnection(Connection.Conn()))
+                    {
+                        try
+                        {
+                            connection.Open();
+                            SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+                            DataTable dataTable = new DataTable();
+                            adapter.Fill(dataTable);
+                            return dataTable;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Erro ao carregar dados: " + ex.Message);
+                            return null;
+                        }
+                    }
+
+                }
+            }
 		}
 		public static bool DeleteStudent(int numero)
 		{
@@ -220,6 +220,5 @@ WHERE Curso.sigla = @referenciaCurso";
 				}
 			}
 		}
-
-	}
+    }
 }

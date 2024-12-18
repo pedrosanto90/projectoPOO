@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Windows.Forms;
 
 struct Course
 {
@@ -130,7 +132,7 @@ namespace projectoPOO
 
 		}
 
-		public static List<Course> GetAllCourses()
+		public static DataTable GetAllCourses()
 		{
 			List<Course> allCourses = new List<Course>();
 
@@ -141,26 +143,27 @@ namespace projectoPOO
 				string query = @"SELECT * FROM Curso;";
 
 
-				using (SqlCommand cmd = new SqlCommand(query, cn))
-				{
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                {
+                    using (SqlConnection connection = new SqlConnection(Connection.Conn()))
+                    {
+                        try
+                        {
+                            connection.Open();
+                            SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+                            DataTable dataTable = new DataTable();
+                            adapter.Fill(dataTable);
+                            return dataTable;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Erro ao carregar dados: " + ex.Message);
+                            return null;
+                        }
+                    }
 
-					using (SqlDataReader reader = cmd.ExecuteReader())
-					{
-						while (reader.Read())
-						{
-							Course course = new Course
-							{
-								Ref = reader["referencia"].ToString(),
-								Name = reader["nome"].ToString(),
-								Acronym = reader["sigla"].ToString(),
-								StartDate = reader["dataInicio"].ToString(),
-							};
-							allCourses.Add(course);
-						}
-					}
-				}
-			}
-			return allCourses;
+                }
+            }
 		}
 
 		public static bool DeleteCourse(int referencia)

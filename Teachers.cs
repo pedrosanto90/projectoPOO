@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 struct Teacher
 {
@@ -154,7 +156,7 @@ namespace projectoPOO
 			}
 		}
 
-		public static List<Teacher> GetAllTeachers()
+		public static DataTable GetAllTeachers()
 		{
 			List<Teacher> allTeachers = new List<Teacher>();
 
@@ -164,29 +166,27 @@ namespace projectoPOO
 
 				string query = @"SELECT * FROM Docente";
 
-				using (SqlCommand cmd = new SqlCommand(query, cn))
-				{
-					using (SqlDataReader reader = cmd.ExecuteReader())
-					{
-						while (reader.Read())
-						{
-							Teacher teacher = new Teacher
-							{
-								Number = reader["numero"].ToString(),
-								Name = reader["nomeProprio"].ToString(),
-								LastName = reader["apelido"].ToString(),
-								Birthday = reader["dataNascimento"].ToString(),
-								Email = reader["email"].ToString(),
-								Phone = reader["telefone"].ToString(),
-								Extension = reader["extensao"].ToString(),
-								Salary = reader["salario"].ToString()
-							};
-							allTeachers.Add(teacher);
-						}
-					}
-				}
-			}
-			return allTeachers;
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                {
+                    using (SqlConnection connection = new SqlConnection(Connection.Conn()))
+                    {
+                        try
+                        {
+                            connection.Open();
+                            SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+                            DataTable dataTable = new DataTable();
+                            adapter.Fill(dataTable);
+                            return dataTable;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Erro ao carregar dados: " + ex.Message);
+                            return null;
+                        }
+                    }
+
+                }
+            }
 		}
 		public static bool DeleteTeacher(int numero)
 		{
