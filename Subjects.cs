@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 
 struct Subject
@@ -19,50 +21,6 @@ namespace projectoPOO
 {
 	internal class Subjects
 	{
-		public static DataTable GetAllSubjects()
-		{
-			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
-			{
-				cn.Open();
-
-				string query = @"SELECT
-									UnidadeCurricular.id AS Id,
-									Curso.sigla AS Curso,
-									CONCAT(Docente.NomeProprio, ' ', Docente.Apelido) AS Docente,
-									UnidadeCurricular.nome AS Nome,
-									UnidadeCurricular.sigla AS UC,
-									creditos AS Créditos,
-									ano AS Ano,
-									semestre AS Semestre
-								FROM UnidadeCurricular
-								JOIN Curso ON Curso.referencia = UnidadeCurricular.referenciaCurso
-								JOIN Docente ON Docente.numero = UnidadeCurricular.numeroDocente;";
-
-				using (SqlCommand cmd = new SqlCommand(query, cn))
-				{
-					using (SqlConnection connection = new SqlConnection(Connection.Conn()))
-					{
-						try
-						{
-							connection.Open();
-							SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
-							DataTable dataTable = new DataTable();
-							adapter.Fill(dataTable);
-							return dataTable;
-						}
-						catch (Exception ex)
-						{
-							MessageBox.Show("Erro ao carregar dados: " + ex.Message);
-							return null;
-						}
-					}
-
-				}
-
-
-			}
-
-		}
 		public static List<Subject> GetSubject(int id)
 		{
 			List<Subject> subjects = new List<Subject>();
@@ -112,31 +70,160 @@ namespace projectoPOO
 			}
 			return subjects;
 		}
-		public static bool UpdateSubject(Subject subject)
-		{
+
+        public static bool AddSubject(Subject subject)
+        {
+
+            using (SqlConnection cn = new SqlConnection(Connection.Conn()))
+            {
+                cn.Open();
+
+                // Obter o maior número
+                string query = "SELECT MAX(id) AS maior_numero FROM UnidadeCurricular;";
+                int subjectId = 1; // Caso não haja UCs na tabela, começamos do 1.
+
+                using (SqlCommand command = new SqlCommand(query, cn))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read() && !reader.IsDBNull(0)) // Verifica se há valor
+                        {
+                            subjectId = reader.GetInt32(0) + 100000000; // Incrementa o maior número
+                        }
+                    }
+                }
+
+                // Criar Sigla
+                string subjectName = subject.Name;
+                string subjectAcronym = new string(subjectName.Where(char.IsUpper).ToArray());
+
+				// Inserir a nova UC
+				query = @"
+						INSERT INTO	UnidadeCurricular 
+							(id, referenciaCurso, numeroDocente, nome, sigla, creditos, ano, semestre) 
+						SELECT
+							@id,
+							Curso.referencia,
+							numeroDocente = (
+								SELECT Docente.numero 
+								FROM Docente 
+								WHERE Docente.nomeProprio + ' ' + Docente.apelido = @nomeDocente
+							),
+							@nome, 
+							@sigla,
+							@creditos,
+							@ano,
+							@semestre
+						FROM 
+							Curso
+						WHERE 
+							Curso.sigla = @referenciaCurso;";
+
+
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                {
+                    cmd.Parameters.AddWithValue("@id", subjectId);
+                    cmd.Parameters.AddWithValue("@referenciaCurso", subject.Course);
+                    cmd.Parameters.AddWithValue("@nomeDocente", subject.Teacher);
+                    cmd.Parameters.AddWithValue("@nome", subject.Name);
+                    cmd.Parameters.AddWithValue("@sigla", subjectAcronym);
+                    cmd.Parameters.AddWithValue("@creditos", Convert.ToDecimal(subject.Credits, CultureInfo.InvariantCulture));
+                    cmd.Parameters.AddWithValue("@ano", subject.Year);
+                    cmd.Parameters.AddWithValue("@semestre", subject.Semester);
+
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public static bool UpdateSubject(Subject subject)
+        {
+            using (SqlConnection cn = new SqlConnection(Connection.Conn()))
+            {
+                cn.Open();
+
+                string query = @"
+				UPDATE UnidadeCurricular 
+				SET creditos = @creditos,
+					numeroDocente = (
+						SELECT Docente.numero 
+						FROM Docente 
+						WHERE Docente.nomeProprio + ' ' + Docente.apelido = @nomeDocente
+					)
+				FROM UnidadeCurricular
+				WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                {
+                    cmd.Parameters.AddWithValue("@id", subject.Id);
+                    cmd.Parameters.AddWithValue("@creditos", Convert.ToDecimal(subject.Credits, CultureInfo.InvariantCulture));
+					cmd.Parameters.AddWithValue("@nomeDocente", subject.Teacher);
+					
+					
+					return cmd.ExecuteNonQuery() > 0;
+
+                }
+            }
+        }
+
+        public static bool DeleteSubject(int id)
+        {
+            using (SqlConnection cn = new SqlConnection(Connection.Conn()))
+            {
+                cn.Open();
+
+                string query = @"DELETE FROM UnidadeCurricular
+                             WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public static DataTable GetAllSubjects()
+        {
 			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
 			{
 				cn.Open();
 
-				string query = @"UPDATE UnidadeCurricular 
-                             SET 
-                                 creditos = @creditos,
-								 numeroDocente = Docente.numero 
-								 FROM	UnidadeCurricular
-								 INNER JOIN Docente ON CONCAT(Docente.nomeProprio, ' ', Docente.apelido) = @nomeDocente
-						         WHERE id = @id";
-
+				string query = @"SELECT
+									UnidadeCurricular.id AS Id,
+									Curso.sigla AS Curso,
+									CONCAT(Docente.NomeProprio, ' ', Docente.Apelido) AS Docente,
+									UnidadeCurricular.nome AS Nome,
+									UnidadeCurricular.sigla AS UC,
+									creditos AS Créditos,
+									ano AS Ano,
+									semestre AS Semestre
+								FROM UnidadeCurricular
+								JOIN Curso ON Curso.referencia = UnidadeCurricular.referenciaCurso
+								JOIN Docente ON Docente.numero = UnidadeCurricular.numeroDocente;";
 
 				using (SqlCommand cmd = new SqlCommand(query, cn))
 				{
-					cmd.Parameters.AddWithValue("@id", subject.Id);
-					cmd.Parameters.AddWithValue("@creditos", Decimal.Parse(subject.Credits));
-					cmd.Parameters.AddWithValue("@nomeDocente", subject.Teacher);
+					using (SqlConnection connection = new SqlConnection(Connection.Conn()))
+					{
+						try
+						{
+							connection.Open();
+							SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+							DataTable dataTable = new DataTable();
+							adapter.Fill(dataTable);
+							return dataTable;
+						}
+						catch (Exception ex)
+						{
+							MessageBox.Show("Erro ao carregar dados: " + ex.Message);
+							return null;
+						}
+					}
 
-					return cmd.ExecuteNonQuery() > 0;
 				}
-			}
-		}
 
-	}
+			}
+        }
+    }
 }

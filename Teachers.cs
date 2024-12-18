@@ -86,7 +86,7 @@ namespace projectoPOO
 					{
 						if (reader.Read() && !reader.IsDBNull(0)) // Verifica se há valor
 						{
-							teacherNumber = reader.GetInt32(0) + 1; // Incrementa o maior número
+							teacherNumber = reader.GetInt32(0) + 1000; // Incrementa o maior número
 						}
 					}
 				}
