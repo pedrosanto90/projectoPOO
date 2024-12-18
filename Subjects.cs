@@ -71,31 +71,35 @@ namespace projectoPOO
 			return subjects;
 		}
 
-        public static bool AddSubject(Subject subject)
-        {
+		public static bool AddSubject(Subject subject)
+		{
 
-            using (SqlConnection cn = new SqlConnection(Connection.Conn()))
-            {
-                cn.Open();
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
+			{
+				cn.Open();
 
-                // Obter o maior número
-                string query = "SELECT MAX(id) AS maior_numero FROM UnidadeCurricular;";
-                int subjectId = 1; // Caso não haja UCs na tabela, começamos do 1.
+				// Obter o maior número
+				string query = @"SELECT MAX(UnidadeCurricular.id) AS maior_numero
+								FROM UnidadeCurricular
+								JOIN Curso ON CAST(UnidadeCurricular.id AS VARCHAR) LIKE '%' + 	CAST(Curso.referencia AS VARCHAR) + '%'
+								WHERE Curso.sigla = @refCurso;";
+				int subjectId = 1; // Caso não haja UCs na tabela, começamos do 1.
 
-                using (SqlCommand command = new SqlCommand(query, cn))
-                {
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read() && !reader.IsDBNull(0)) // Verifica se há valor
-                        {
-                            subjectId = reader.GetInt32(0) + 100000000; // Incrementa o maior número
-                        }
-                    }
-                }
+				using (SqlCommand command = new SqlCommand(query, cn))
+				{
+					command.Parameters.AddWithValue("@refCurso", subject.Course); //ITM
+					using (SqlDataReader reader = command.ExecuteReader())
+					{
+						if (reader.Read() && !reader.IsDBNull(0)) // Verifica se há valor
+						{
+							subjectId = reader.GetInt32(0) + 10000; // Incrementa o maior número
+						}
+					}
+				}
 
-                // Criar Sigla
-                string subjectName = subject.Name;
-                string subjectAcronym = new string(subjectName.Where(char.IsUpper).ToArray());
+				// Criar Sigla
+				string subjectName = subject.Name;
+				string subjectAcronym = new string(subjectName.Where(char.IsUpper).ToArray());
 
 				// Inserir a nova UC
 				query = @"
@@ -120,29 +124,29 @@ namespace projectoPOO
 							Curso.sigla = @referenciaCurso;";
 
 
-                using (SqlCommand cmd = new SqlCommand(query, cn))
-                {
-                    cmd.Parameters.AddWithValue("@id", subjectId);
-                    cmd.Parameters.AddWithValue("@referenciaCurso", subject.Course);
-                    cmd.Parameters.AddWithValue("@nomeDocente", subject.Teacher);
-                    cmd.Parameters.AddWithValue("@nome", subject.Name);
-                    cmd.Parameters.AddWithValue("@sigla", subjectAcronym);
-                    cmd.Parameters.AddWithValue("@creditos", Convert.ToDecimal(subject.Credits, CultureInfo.InvariantCulture));
-                    cmd.Parameters.AddWithValue("@ano", subject.Year);
-                    cmd.Parameters.AddWithValue("@semestre", subject.Semester);
+				using (SqlCommand cmd = new SqlCommand(query, cn))
+				{
+					cmd.Parameters.AddWithValue("@id", subjectId);
+					cmd.Parameters.AddWithValue("@referenciaCurso", subject.Course);
+					cmd.Parameters.AddWithValue("@nomeDocente", subject.Teacher);
+					cmd.Parameters.AddWithValue("@nome", subject.Name);
+					cmd.Parameters.AddWithValue("@sigla", subjectAcronym);
+					cmd.Parameters.AddWithValue("@creditos", Convert.ToDecimal(subject.Credits, CultureInfo.InvariantCulture));
+					cmd.Parameters.AddWithValue("@ano", subject.Year);
+					cmd.Parameters.AddWithValue("@semestre", subject.Semester);
 
-                    return cmd.ExecuteNonQuery() > 0;
-                }
-            }
-        }
+					return cmd.ExecuteNonQuery() > 0;
+				}
+			}
+		}
 
-        public static bool UpdateSubject(Subject subject)
-        {
-            using (SqlConnection cn = new SqlConnection(Connection.Conn()))
-            {
-                cn.Open();
+		public static bool UpdateSubject(Subject subject)
+		{
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
+			{
+				cn.Open();
 
-                string query = @"
+				string query = @"
 				UPDATE UnidadeCurricular 
 				SET creditos = @creditos,
 					numeroDocente = (
@@ -153,38 +157,38 @@ namespace projectoPOO
 				FROM UnidadeCurricular
 				WHERE id = @id";
 
-                using (SqlCommand cmd = new SqlCommand(query, cn))
-                {
-                    cmd.Parameters.AddWithValue("@id", subject.Id);
-                    cmd.Parameters.AddWithValue("@creditos", Convert.ToDecimal(subject.Credits, CultureInfo.InvariantCulture));
+				using (SqlCommand cmd = new SqlCommand(query, cn))
+				{
+					cmd.Parameters.AddWithValue("@id", subject.Id);
+					cmd.Parameters.AddWithValue("@creditos", Convert.ToDecimal(subject.Credits, CultureInfo.InvariantCulture));
 					cmd.Parameters.AddWithValue("@nomeDocente", subject.Teacher);
-					
-					
+
+
 					return cmd.ExecuteNonQuery() > 0;
 
-                }
-            }
-        }
+				}
+			}
+		}
 
-        public static bool DeleteSubject(int id)
-        {
-            using (SqlConnection cn = new SqlConnection(Connection.Conn()))
-            {
-                cn.Open();
+		public static bool DeleteSubject(int id)
+		{
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
+			{
+				cn.Open();
 
-                string query = @"DELETE FROM UnidadeCurricular
+				string query = @"DELETE FROM UnidadeCurricular
                              WHERE id = @id";
 
-                using (SqlCommand cmd = new SqlCommand(query, cn))
-                {
-                    cmd.Parameters.AddWithValue("@id", id);
-                    return cmd.ExecuteNonQuery() > 0;
-                }
-            }
-        }
+				using (SqlCommand cmd = new SqlCommand(query, cn))
+				{
+					cmd.Parameters.AddWithValue("@id", id);
+					return cmd.ExecuteNonQuery() > 0;
+				}
+			}
+		}
 
-        public static DataTable GetAllSubjects()
-        {
+		public static DataTable GetAllSubjects()
+		{
 			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
 			{
 				cn.Open();
@@ -224,6 +228,6 @@ namespace projectoPOO
 				}
 
 			}
-        }
-    }
+		}
+	}
 }

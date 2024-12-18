@@ -33,9 +33,13 @@ namespace projectoPOO
 			ToolStripMenuItem updateCourse = new ToolStripMenuItem("Atualizar Curso", null, new EventHandler(updateCourse_Click));
 			ToolStripMenuItem showAllCourses = new ToolStripMenuItem("Mostrar todos os Cursos", null, new EventHandler(showAllCourses_Click));
 
-            ToolStripMenuItem newSubject = new ToolStripMenuItem("Nova Unidade Curricular", null, new EventHandler(newSubject_Click));
-            ToolStripMenuItem upadateSubject = new ToolStripMenuItem("Atualizar Unidade Curricular ", null, new EventHandler(updateSubject_Click));
+			ToolStripMenuItem newSubject = new ToolStripMenuItem("Nova Unidade Curricular", null, new EventHandler(newSubject_Click));
+			ToolStripMenuItem upadateSubject = new ToolStripMenuItem("Atualizar Unidade Curricular ", null, new EventHandler(updateSubject_Click));
 			ToolStripMenuItem showAllSubjects = new ToolStripMenuItem("Mostrar todas as Unidades Curriculares ", null, new EventHandler(showAllSubjects_Click));
+
+			ToolStripMenuItem closeProgram = new ToolStripMenuItem("Sair", null, new EventHandler(closeProgram_Click));
+
+			windowMenuFile.DropDownItems.Add(closeProgram);
 
 			windowMenuStudent.DropDownItems.Add(newStudent);
 			windowMenuStudent.DropDownItems.Add(updateStudent);
@@ -55,16 +59,20 @@ namespace projectoPOO
 
 			// Assign the ToolStripMenuItem that displays 
 			// the list of child forms.
+			ms.MdiWindowListItem = windowMenuFile;
 			ms.MdiWindowListItem = windowMenuStudent;
 			ms.MdiWindowListItem = windowMenuTeacher;
 			ms.MdiWindowListItem = windowMenuCourse;
 			ms.MdiWindowListItem = windowMenuSubject;
 
+
 			// Add the window ToolStripMenuItem to the MenuStrip.
+			ms.Items.Add(windowMenuFile);
 			ms.Items.Add(windowMenuStudent);
 			ms.Items.Add(windowMenuTeacher);
 			ms.Items.Add(windowMenuCourse);
 			ms.Items.Add(windowMenuSubject);
+
 
 			// Dock the MenuStrip to the top of the form.
 			ms.Dock = DockStyle.Top;
@@ -93,6 +101,7 @@ namespace projectoPOO
 			btnCancelUpdateStudent.Visible = false;
 
 			btnDeleteStudent.Visible = false;
+			btnEnrollStudent.Visible = false;
 
 			btnDeleteTeacher.Visible = false;
 
@@ -132,85 +141,98 @@ namespace projectoPOO
 
 		}
 
-        public void CleanBox()
-        {
-            txtStudentNumber.Text = string.Empty;
-            txtStudentName.Text = string.Empty;
-            txtStudentLastName.Text = string.Empty;
-            txtStudentBirthdate.Text = string.Empty;
-            txtStudentAddress.Text = string.Empty;
-            txtStudentPhone.Text = string.Empty;
-            txtStudentEmail.Text = string.Empty;
-            txtSearchStudent.Text = string.Empty;
-            txtStudentCourse.Text = string.Empty;
+		public void CleanBox()
+		{
+			txtStudentNumber.Text = string.Empty;
+			txtStudentName.Text = string.Empty;
+			txtStudentLastName.Text = string.Empty;
+			txtStudentBirthdate.Text = string.Empty;
+			txtStudentAddress.Text = string.Empty;
+			txtStudentPhone.Text = string.Empty;
+			txtStudentEmail.Text = string.Empty;
+			txtSearchStudent.Text = string.Empty;
+			txtStudentCourse.Text = string.Empty;
 
-            btnDeleteStudent.Visible = false;
+			btnDeleteStudent.Visible = false;
 
-            txtTeacherNumber.Text = string.Empty;
-            txtTeacherName.Text = string.Empty;
-            txtTeacherLastName.Text = string.Empty;
-            txtTeacherBirthdate.Text = string.Empty;
-            txtTeacherExtension.Text = string.Empty;
-            txtTeacherPhone.Text = string.Empty;
-            txtTeacherEmail.Text = string.Empty;
-            txtSearchTeacher.Text = string.Empty;
-            txtTeacherSalary.Text = string.Empty;
+			txtTeacherNumber.Text = string.Empty;
+			txtTeacherName.Text = string.Empty;
+			txtTeacherLastName.Text = string.Empty;
+			txtTeacherBirthdate.Text = string.Empty;
+			txtTeacherExtension.Text = string.Empty;
+			txtTeacherPhone.Text = string.Empty;
+			txtTeacherEmail.Text = string.Empty;
+			txtSearchTeacher.Text = string.Empty;
+			txtTeacherSalary.Text = string.Empty;
 
-            btnDeleteTeacher.Visible = false;
+			btnDeleteTeacher.Visible = false;
 
-            txtSearchCourse.Text = string.Empty;
-            txtCourseRef.Text = string.Empty;
-            txtCourseName.Text = string.Empty;
-            txtCourseAcronym.Text = string.Empty;
-            txtCourseStartDate.Text = string.Empty;
+			txtSearchCourse.Text = string.Empty;
+			txtCourseRef.Text = string.Empty;
+			txtCourseName.Text = string.Empty;
+			txtCourseAcronym.Text = string.Empty;
+			txtCourseStartDate.Text = string.Empty;
 
-            btnDeleteCourse.Visible = false;
+			btnDeleteCourse.Visible = false;
 
-            txtSubjectNumber.Text = string.Empty;
-            txtSubjectName.Text = string.Empty;
-            txtSubjectTeacher.Text = string.Empty;
-            txtSubjectCredits.Text = string.Empty;
-            txtSubjectCourse.Text = string.Empty;
-            txtSubjectAcronym.Text = string.Empty;
-            txtSubjectYear.Text = string.Empty;
-            txtSubjectSemester.Text = string.Empty;
-            txtSearchSubject.Text = string.Empty;
+			txtSubjectNumber.Text = string.Empty;
+			txtSubjectName.Text = string.Empty;
+			txtSubjectTeacher.Text = string.Empty;
+			txtSubjectCredits.Text = string.Empty;
+			txtSubjectCourse.Text = string.Empty;
+			txtSubjectAcronym.Text = string.Empty;
+			txtSubjectYear.Text = string.Empty;
+			txtSubjectSemester.Text = string.Empty;
+			txtSearchSubject.Text = string.Empty;
 
-            btnDeleteSubject.Visible = false;
-        }
+			btnDeleteSubject.Visible = false;
+		}
 
-        private List<Student> studentInfo()
-        {
-            int number = Int32.Parse(txtSearchTeacher.Text);
-            List<Student> student = Students.GetStudents(number);
-
-            txtStudentNumber.Text = student[0].Number;
-            txtStudentCourse.Text = student[0].Course;
-            txtStudentName.Text = student[0].Name;
-            txtStudentLastName.Text = student[0].LastName;
-            txtStudentBirthdate.Text = student[0].Birthday;
-            txtStudentAddress.Text = student[0].Address;
-            txtStudentEmail.Text = student[0].Email;
-            txtStudentPhone.Text = student[0].Phone;
-
-            return student;
-
-        }
-
-        private void btnSearchStudent_Click(object sender, System.EventArgs e)
+		private List<Student> studentInfo()
 		{
 			int number = Int32.Parse(txtSearchStudent.Text);
 			List<Student> student = Students.GetStudents(number);
 
-			if (student.Count > 0)
+			txtStudentNumber.Text = student[0].Number;
+			txtStudentCourse.Text = student[0].Course;
+			txtStudentName.Text = student[0].Name;
+			txtStudentLastName.Text = student[0].LastName;
+			txtStudentBirthdate.Text = student[0].Birthday;
+			txtStudentAddress.Text = student[0].Address;
+			txtStudentEmail.Text = student[0].Email;
+			txtStudentPhone.Text = student[0].Phone;
+
+			return student;
+
+		}
+
+		private void btnSearchStudent_Click(object sender, System.EventArgs e)
+		{
+
+			int number = Int32.Parse(txtSearchStudent.Text);  // Número do aluno (não pode ser alterado)
+
+
+			try
 			{
-				studentInfo();
-                btnDeleteStudent.Visible = true;
+				List<Student> student = studentInfo();
+
+
+				if (student.Count > 0)
+				{
+					studentInfo();
+
+				}
 			}
-			else
+			catch
 			{
-				MessageBox.Show($"Nenhum aluno encontrado com o número {number}", "Info");
+				MessageBox.Show($"Nenhum aluno encontrado", "Info");
 			}
+			btnDeleteStudent.Visible = true;
+			if (Students.GetStudentEnrollment(number))
+			{
+				btnEnrollStudent.Visible = true;
+			}
+
 		}
 		void newStudent_Click(object sender, EventArgs e)
 		{
@@ -255,7 +277,7 @@ namespace projectoPOO
 					MessageBox.Show("Aluno atualizado com sucesso!", "Sucesso");
 					studentInfo();
 
-                }
+				}
 				else
 				{
 					MessageBox.Show("Erro ao atualizar o aluno. Verifique os dados e tente novamente.", "Erro");
@@ -566,18 +588,18 @@ namespace projectoPOO
 			}
 		}
 
-        private void btnCancelUpdateCourse_Click(object sender, EventArgs e)
-        {
-            txtCourseRef.ReadOnly = true;
-            txtCourseName.ReadOnly = true;
-            txtCourseAcronym.ReadOnly = true;
-            txtCourseStartDate.ReadOnly = true;
+		private void btnCancelUpdateCourse_Click(object sender, EventArgs e)
+		{
+			txtCourseRef.ReadOnly = true;
+			txtCourseName.ReadOnly = true;
+			txtCourseAcronym.ReadOnly = true;
+			txtCourseStartDate.ReadOnly = true;
 
-            btnUpdateCourse.Visible = false;
-            btnCancelUpdateCourse.Visible = false;
-        }
+			btnUpdateCourse.Visible = false;
+			btnCancelUpdateCourse.Visible = false;
+		}
 
-        private void btnDeleteCourse_Click(object sender, EventArgs e)
+		private void btnDeleteCourse_Click(object sender, EventArgs e)
 		{
 			int reference = Int32.Parse(txtCourseRef.Text);
 			var confirmResult = MessageBox.Show(
@@ -609,32 +631,32 @@ namespace projectoPOO
 			f.Show();
 		}
 
-        private List<Subject> subjectInfo()
-        {
-            int id = Int32.Parse(txtSearchSubject.Text);
-            List<Subject> subject = Subjects.GetSubject(id);
+		private List<Subject> subjectInfo()
+		{
+			int id = Int32.Parse(txtSearchSubject.Text);
+			List<Subject> subject = Subjects.GetSubject(id);
 
-            txtSubjectNumber.Text = subject[0].Id;
-            txtSubjectCourse.Text = subject[0].Course;
-            txtSubjectTeacher.Text = subject[0].Teacher;
-            txtSubjectName.Text = subject[0].Name;
-            txtSubjectAcronym.Text = subject[0].Acronym;
-            txtSubjectCredits.Text = subject[0].Credits;
-            txtSubjectYear.Text = subject[0].Year;
-            txtSubjectSemester.Text = subject[0].Semester;
+			txtSubjectNumber.Text = subject[0].Id;
+			txtSubjectCourse.Text = subject[0].Course;
+			txtSubjectTeacher.Text = subject[0].Teacher;
+			txtSubjectName.Text = subject[0].Name;
+			txtSubjectAcronym.Text = subject[0].Acronym;
+			txtSubjectCredits.Text = subject[0].Credits;
+			txtSubjectYear.Text = subject[0].Year;
+			txtSubjectSemester.Text = subject[0].Semester;
 
-            return subject;
+			return subject;
 
-        }
+		}
 
-        void newSubject_Click(object sender, EventArgs e)
-        {
-            NewSubject f = new NewSubject();
-            f.Text = "Nova Unidade Curricular";
-            f.Show();
-        }
+		void newSubject_Click(object sender, EventArgs e)
+		{
+			NewSubject f = new NewSubject();
+			f.Text = "Nova Unidade Curricular";
+			f.Show();
+		}
 
-        void updateSubject_Click(object sender, EventArgs e)
+		void updateSubject_Click(object sender, EventArgs e)
 		{
 			txtSubjectTeacher.ReadOnly = false;
 			txtSubjectCredits.ReadOnly = false;
@@ -670,86 +692,90 @@ namespace projectoPOO
 
 		private void btnUpdateSubject_Click(object sender, EventArgs e)
 		{
-            try
-            {
-                // Criar um objeto docente com os dados atualizados
-                Subject updatedSubject = new Subject
-                {
-                    Id = txtSubjectNumber.Text,
-                    Course = txtSubjectCourse.Text,
-                    Teacher = txtSubjectTeacher.Text,
-                    Name = txtCourseName.Text,
-                    Acronym = txtCourseAcronym.Text,
+			try
+			{
+				// Criar um objeto docente com os dados atualizados
+				Subject updatedSubject = new Subject
+				{
+					Id = txtSubjectNumber.Text,
+					Course = txtSubjectCourse.Text,
+					Teacher = txtSubjectTeacher.Text,
+					Name = txtCourseName.Text,
+					Acronym = txtCourseAcronym.Text,
 					Year = txtSubjectYear.Text,
 					Semester = txtSubjectSemester.Text,
 					Credits = txtSubjectCredits.Text
-                };
+				};
 
-                // Atualizar docente no banco
-                bool success = Subjects.UpdateSubject(updatedSubject);
+				// Atualizar docente no banco
+				bool success = Subjects.UpdateSubject(updatedSubject);
 
-                if (success)
-                {
-                    MessageBox.Show("UC atualizada com sucesso!", "Sucesso");
-                    subjectInfo();
-                }
-                else
-                {
-                    MessageBox.Show("Erro ao atualizar a UC. Verifique os dados e tente novamente.", "Erro");
-                }
+				if (success)
+				{
+					MessageBox.Show("UC atualizada com sucesso!", "Sucesso");
+					subjectInfo();
+				}
+				else
+				{
+					MessageBox.Show("Erro ao atualizar a UC. Verifique os dados e tente novamente.", "Erro");
+				}
 
-                // Voltar os campos para somente leitura após atualização
-                txtSubjectTeacher.ReadOnly = true;
-                txtSubjectCredits.ReadOnly = true;
+				// Voltar os campos para somente leitura após atualização
+				txtSubjectTeacher.ReadOnly = true;
+				txtSubjectCredits.ReadOnly = true;
 
-                btnUpdateSubject.Visible = false;
-                btnCancelUpdateSubject.Visible = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erro: {ex.Message}", "Erro");
-            }
-        }
+				btnUpdateSubject.Visible = false;
+				btnCancelUpdateSubject.Visible = false;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"Erro: {ex.Message}", "Erro");
+			}
+		}
 
-        private void btnCancelUpdateSubject_Click(object sender, EventArgs e)
-        {
-            txtSubjectAcronym.ReadOnly = true;
-            txtSubjectNumber.ReadOnly = true;
-            txtSubjectCourse.ReadOnly = true;
-            txtSubjectName.ReadOnly = true;
-            txtSubjectCredits.ReadOnly = true;
-            txtSubjectYear.ReadOnly = true;
-            txtSubjectSemester.ReadOnly = true;
-            txtSubjectTeacher.ReadOnly = true;
+		private void btnCancelUpdateSubject_Click(object sender, EventArgs e)
+		{
+			txtSubjectAcronym.ReadOnly = true;
+			txtSubjectNumber.ReadOnly = true;
+			txtSubjectCourse.ReadOnly = true;
+			txtSubjectName.ReadOnly = true;
+			txtSubjectCredits.ReadOnly = true;
+			txtSubjectYear.ReadOnly = true;
+			txtSubjectSemester.ReadOnly = true;
+			txtSubjectTeacher.ReadOnly = true;
 
-            btnUpdateSubject.Visible = false;
-            btnCancelUpdateSubject.Visible = false;
+			btnUpdateSubject.Visible = false;
+			btnCancelUpdateSubject.Visible = false;
 
-        }
+		}
 
-        private void btnDeleteSubject_Click(object sender, EventArgs e)
-        {
-            int id = Int32.Parse(txtSubjectNumber.Text);
-            var confirmResult = MessageBox.Show(
-                    $"Tem certeza de que deseja eliminar a UC?",
-                    "Eliminar UC",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning);
+		private void btnDeleteSubject_Click(object sender, EventArgs e)
+		{
+			int id = Int32.Parse(txtSubjectNumber.Text);
+			var confirmResult = MessageBox.Show(
+					$"Tem certeza de que deseja eliminar a UC?",
+					"Eliminar UC",
+					MessageBoxButtons.YesNo,
+					MessageBoxIcon.Warning);
 
-            if (confirmResult == DialogResult.Yes)
-            {
-                bool success = Subjects.DeleteSubject(id);
+			if (confirmResult == DialogResult.Yes)
+			{
+				bool success = Subjects.DeleteSubject(id);
 
-                if (success)
-                {
-                    MessageBox.Show("UC eliminada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    CleanBox();
-                }
-                else
-                {
-                    MessageBox.Show("Erro ao excluir a UC. Verifique se a UC existe.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-    }
+				if (success)
+				{
+					MessageBox.Show("UC eliminada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					CleanBox();
+				}
+				else
+				{
+					MessageBox.Show("Erro ao excluir a UC. Verifique se a UC existe.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+			}
+		}
+		private void closeProgram_Click(object sender, EventArgs e)
+		{
+			CloseProgram.Exit();
+		}
+	}
 }

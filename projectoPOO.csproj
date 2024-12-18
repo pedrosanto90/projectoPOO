@@ -110,8 +110,15 @@
     <Compile Include="AllSubjects.Designer.cs">
       <DependentUpon>AllSubjects.cs</DependentUpon>
     </Compile>
+    <Compile Include="CloseProgram.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="Courses.cs" />
+    <Compile Include="Enroll.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Enroll.Designer.cs">
+      <DependentUpon>Enroll.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AllSubjects.resx">
       <DependentUpon>AllSubjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Enroll.resx">
+      <DependentUpon>Enroll.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainScreen.resx">
       <DependentUpon>MainScreen.cs</DependentUpon>

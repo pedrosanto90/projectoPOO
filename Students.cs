@@ -195,7 +195,31 @@ WHERE Curso.sigla = @referenciaCurso";
 				}
 			}
 		}
+		public static bool GetStudentEnrollment(int student)
+		{
 
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
+			{
+				cn.Open();
+
+				// Obter o maior número
+				string query = "SELECT * FROM Inscricao WHERE numeroAluno = @numero;";
+
+				using (SqlCommand command = new SqlCommand(query, cn))
+				{
+					command.Parameters.AddWithValue("@numero", student);
+					bool studentEnroll = true;
+					using (SqlDataReader reader = command.ExecuteReader())
+					{
+						if (reader.Read() && !reader.IsDBNull(0)) // Verifica se há valor
+						{
+							studentEnroll = false;
+						}
+						return studentEnroll;
+					}
+				}
+			}
+		}
 
 	}
 }
