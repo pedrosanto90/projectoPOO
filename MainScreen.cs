@@ -22,6 +22,7 @@ namespace projectoPOO
 			ToolStripMenuItem windowMenuHelp = new ToolStripMenuItem("Ajuda");
 
 			ToolStripMenuItem scoreAttribution = new ToolStripMenuItem("Atribuir Notas", null, new EventHandler(scoreAttribution_Click));
+            ToolStripMenuItem examEntry = new ToolStripMenuItem("Inscrever em Exame", null, new EventHandler(examEntry_Click));
             ToolStripMenuItem closeProgram = new ToolStripMenuItem("Sair", null, new EventHandler(closeProgram_Click));
 
             ToolStripMenuItem newStudent = new ToolStripMenuItem("Novo Aluno", null, new EventHandler(newStudent_Click));
@@ -42,6 +43,7 @@ namespace projectoPOO
 
 
             windowMenuFile.DropDownItems.Add(scoreAttribution);
+			windowMenuFile.DropDownItems.Add(examEntry);
             windowMenuFile.DropDownItems.Add(closeProgram);
 
 			windowMenuStudent.DropDownItems.Add(newStudent);
@@ -790,13 +792,20 @@ namespace projectoPOO
 
             Enrollment.EnrollStudent(newEnroll);
             MessageBox.Show("Aluno inscrito com sucesso");
-            this.Close();
+			CleanBox();
         }
 
         void scoreAttribution_Click(object sender, EventArgs e)
         {
             GiveScores f = new GiveScores();
             f.Text = "Atribuição de Notas";
+            f.Show();
+        }
+
+        void examEntry_Click(object sender, EventArgs e)
+		{
+            ExamEntry f = new ExamEntry();
+            f.Text = "Inscrever em Exame";
             f.Show();
         }
     }

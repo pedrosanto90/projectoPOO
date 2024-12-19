@@ -114,6 +114,12 @@
     <Compile Include="Connection.cs" />
     <Compile Include="Courses.cs" />
     <Compile Include="Enrollment.cs" />
+    <Compile Include="ExamEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExamEntry.Designer.cs">
+      <DependentUpon>ExamEntry.cs</DependentUpon>
+    </Compile>
     <Compile Include="GiveScores.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -173,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AllSubjects.resx">
       <DependentUpon>AllSubjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExamEntry.resx">
+      <DependentUpon>ExamEntry.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GiveScores.resx">
       <DependentUpon>GiveScores.cs</DependentUpon>

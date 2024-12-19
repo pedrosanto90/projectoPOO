@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 public struct Enroll
 {
@@ -71,8 +73,11 @@ namespace projectoPOO
 			{
 				cn.Open();
 
+                int failed = 20;
+				int passed = 30;
+
 				string query = @"UPDATE Inscricao
-                               SET presenca = @presenca, nota = @nota
+                               SET presenca = @presenca, nota = @nota, idEstadoEpoca = @estado
                                WHERE numeroAluno = @numeroAluno
                                AND idUnidadeCurricular = 
                                (SELECT id FROM UnidadeCurricular WHERE nome = @nomeUnidade)
@@ -87,11 +92,18 @@ namespace projectoPOO
 					if (enroll.Score == null)
 					{
 						cmd.Parameters.AddWithValue("@nota", DBNull.Value);
-					}
-					else
+                        cmd.Parameters.AddWithValue("@estado", failed);
+                    }
+					else if (Int32.Parse(enroll.Score) < 10)
 					{
 						cmd.Parameters.AddWithValue("@nota", enroll.Score);
-					}
+                        cmd.Parameters.AddWithValue("@estado", failed);
+                    }
+					else
+					{
+                        cmd.Parameters.AddWithValue("@nota", enroll.Score);
+                        cmd.Parameters.AddWithValue("@estado", passed);
+                    }
 					return cmd.ExecuteNonQuery() > 0;
 				}
 			}
@@ -119,8 +131,7 @@ namespace projectoPOO
 					}
 				}
 
-				// string evaluation = "EFRE";  // Época de avaliação original
-
+				int admited = 10;
 
 				// Inserir a inscrição do aluno na nova época de avaliação
 				string query = @"
@@ -133,7 +144,7 @@ namespace projectoPOO
 					cmd.Parameters.AddWithValue("@idUnidadeCurricular", enroll.Subject);
 					cmd.Parameters.AddWithValue("@idAnoLetivo", year);
 					cmd.Parameters.AddWithValue("@idEpocaAvaliacao", enroll.EvaluationSeason);
-					cmd.Parameters.AddWithValue("@idEstadoEpoca", 10);
+					cmd.Parameters.AddWithValue("@idEstadoEpoca", admited);
 
 					return cmd.ExecuteNonQuery() > 0;  // Retorna true se a inserção for bem-sucedida
 				}
@@ -155,7 +166,7 @@ namespace projectoPOO
                                  INNER JOIN Inscricao ON UnidadeCurricular.id = Inscricao.idUnidadeCurricular
                                  INNER JOIN Aluno ON Inscricao.numeroAluno = Aluno.numero
                                  WHERE Aluno.numero = @numeroAluno
-								 AND nota IS NULL;";
+								 AND (nota IS NULL AND presenca IS NULL);";
 
 				using (SqlCommand cmd = new SqlCommand(query, cn))
 				{
@@ -209,5 +220,47 @@ namespace projectoPOO
 			}
 			return season;
 		}
-	}
+
+        public static DataTable GetAllScores(int number)
+        {
+            using (SqlConnection cn = new SqlConnection(Connection.Conn()))
+            {
+                try
+                {
+                    cn.Open();
+
+                    string query = @"SELECT 
+                                UnidadeCurricular.nome, 
+                                Inscricao.presenca, 
+                                Inscricao.nota 
+                             FROM 
+                                Inscricao
+                             INNER JOIN 
+                                UnidadeCurricular 
+                             ON 
+                                Inscricao.idUnidadeCurricular = UnidadeCurricular.id
+                             WHERE 
+                                Inscricao.numeroAluno = @numero;";
+
+                    using (SqlCommand cmd = new SqlCommand(query, cn))
+                    {
+                        cmd.Parameters.AddWithValue("@numero", number);
+
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                        {
+                            DataTable dataTable = new DataTable();
+                            adapter.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro ao carregar dados: " + ex.Message);
+                    return null;
+                }
+            }
+        }
+
+    }
 }

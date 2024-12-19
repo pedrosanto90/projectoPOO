@@ -54,9 +54,9 @@ namespace projectoPOO
 
 			int[] score = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
 
-			foreach (var i in score)
+			foreach (int i in score)
 			{
-				cbScore.Items.Add((int)i);
+				cbScore.Items.Add(i);
 			}
 		}
 		private void btnSearchStudentScore_Click(object sender, EventArgs e)
@@ -91,8 +91,12 @@ namespace projectoPOO
 			if (lblSeason.Text == "Época Normal de Exame")
 			{
 				MessageBox.Show("Nota inserida com sucesso");
-				this.Close();
-			}
+
+                cbScore.SelectedIndex = -1;
+                cbSubject.SelectedIndex = -1;
+				cbAttendance.Checked = false;
+				PopCB();
+            }
 			else
 			{
 				MessageBox.Show("Nota inserida com sucesso");
@@ -112,9 +116,11 @@ namespace projectoPOO
 
 				}
 
-
-				this.Close();
-			}
+				cbScore.SelectedIndex = -1;
+                cbSubject.SelectedIndex = -1;
+                cbAttendance.Checked = false;
+                PopCB();
+            }
 
 		}
 
