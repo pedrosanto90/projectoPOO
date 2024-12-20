@@ -27,7 +27,7 @@ namespace projectoPOO
 				// Verificar se a lista tem dados
 				if (subjects.Count == 0)
 				{
-					MessageBox.Show("Nenhuma disciplina encontrada para este aluno.");
+					MessageBox.Show("Este Aluno não tem notas em falta.");
 				}
 				else
 				{
@@ -131,8 +131,6 @@ namespace projectoPOO
 
 		private void cbSubject_SelectedIndexChanged(object sender, EventArgs e)
 		{
-
-
 			int number = Int32.Parse(txtSearchStudentScore.Text);
 			string idSubject = cbSubject.Text;
 			string subjects = Enrollment.GetSeason(number, idSubject);

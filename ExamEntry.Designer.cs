@@ -28,34 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgAllScores = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnSearchStudentExamEntry = new System.Windows.Forms.Button();
-            this.txtSearchStudentExamEntry = new System.Windows.Forms.TextBox();
-            this.btnEnrollStudent = new System.Windows.Forms.Button();
-            this.btnDeleteStudent = new System.Windows.Forms.Button();
-            this.lblName = new System.Windows.Forms.Label();
-            this.lblStudentNumber = new System.Windows.Forms.Label();
-            this.txtStudentName = new System.Windows.Forms.TextBox();
-            this.txtStudentNumber = new System.Windows.Forms.TextBox();
-            this.btnCancelUpdateStudent = new System.Windows.Forms.Button();
-            this.btnUpdateStudent = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgAllScores)).BeginInit();
+            this.btnSearchStudentExam = new System.Windows.Forms.Button();
+            this.txtSearchStudentExam = new System.Windows.Forms.TextBox();
+            this.btnSpecialExam = new System.Windows.Forms.Button();
+            this.btnAppealExam = new System.Windows.Forms.Button();
+            this.btnCancelExam = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cbSubjectExam = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblStudentNameExam = new System.Windows.Forms.Label();
+            this.cbAppealSubjectExam = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // dgAllScores
-            // 
-            this.dgAllScores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgAllScores.Location = new System.Drawing.Point(12, 46);
-            this.dgAllScores.Name = "dgAllScores";
-            this.dgAllScores.Size = new System.Drawing.Size(314, 316);
-            this.dgAllScores.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(316, 9);
+            this.label1.Location = new System.Drawing.Point(24, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(103, 13);
             this.label1.TabIndex = 3;
@@ -64,137 +56,162 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 3);
+            this.label2.Location = new System.Drawing.Point(9, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(89, 13);
             this.label2.TabIndex = 6;
             this.label2.Text = "Número de Aluno";
             // 
-            // btnSearchStudentExamEntry
+            // btnSearchStudentExam
             // 
-            this.btnSearchStudentExamEntry.Location = new System.Drawing.Point(120, 17);
-            this.btnSearchStudentExamEntry.Name = "btnSearchStudentExamEntry";
-            this.btnSearchStudentExamEntry.Size = new System.Drawing.Size(75, 23);
-            this.btnSearchStudentExamEntry.TabIndex = 5;
-            this.btnSearchStudentExamEntry.Text = "Pesquisar Aluno";
-            this.btnSearchStudentExamEntry.UseVisualStyleBackColor = true;
-            this.btnSearchStudentExamEntry.Click += new System.EventHandler(this.btnSearchStudentExamEntry_Click);
+            this.btnSearchStudentExam.Location = new System.Drawing.Point(12, 87);
+            this.btnSearchStudentExam.Name = "btnSearchStudentExam";
+            this.btnSearchStudentExam.Size = new System.Drawing.Size(75, 23);
+            this.btnSearchStudentExam.TabIndex = 5;
+            this.btnSearchStudentExam.Text = "Pesquisar Aluno";
+            this.btnSearchStudentExam.UseVisualStyleBackColor = true;
+            this.btnSearchStudentExam.Click += new System.EventHandler(this.btnSearchStudentExamEntry_Click);
             // 
-            // txtSearchStudentExamEntry
+            // txtSearchStudentExam
             // 
-            this.txtSearchStudentExamEntry.Location = new System.Drawing.Point(12, 19);
-            this.txtSearchStudentExamEntry.Name = "txtSearchStudentExamEntry";
-            this.txtSearchStudentExamEntry.Size = new System.Drawing.Size(92, 20);
-            this.txtSearchStudentExamEntry.TabIndex = 4;
+            this.txtSearchStudentExam.Location = new System.Drawing.Point(12, 61);
+            this.txtSearchStudentExam.Name = "txtSearchStudentExam";
+            this.txtSearchStudentExam.Size = new System.Drawing.Size(92, 20);
+            this.txtSearchStudentExam.TabIndex = 4;
             // 
-            // btnEnrollStudent
+            // btnSpecialExam
             // 
-            this.btnEnrollStudent.Location = new System.Drawing.Point(508, 216);
-            this.btnEnrollStudent.Name = "btnEnrollStudent";
-            this.btnEnrollStudent.Size = new System.Drawing.Size(115, 23);
-            this.btnEnrollStudent.TabIndex = 24;
-            this.btnEnrollStudent.Text = "Época Especial ";
-            this.btnEnrollStudent.UseVisualStyleBackColor = true;
+            this.btnSpecialExam.Location = new System.Drawing.Point(189, 191);
+            this.btnSpecialExam.Name = "btnSpecialExam";
+            this.btnSpecialExam.Size = new System.Drawing.Size(115, 23);
+            this.btnSpecialExam.TabIndex = 24;
+            this.btnSpecialExam.Text = "Época Especial ";
+            this.btnSpecialExam.UseVisualStyleBackColor = true;
+            this.btnSpecialExam.Click += new System.EventHandler(this.btnSpecialExam_Click);
             // 
-            // btnDeleteStudent
+            // btnAppealExam
             // 
-            this.btnDeleteStudent.Location = new System.Drawing.Point(367, 216);
-            this.btnDeleteStudent.Name = "btnDeleteStudent";
-            this.btnDeleteStudent.Size = new System.Drawing.Size(115, 23);
-            this.btnDeleteStudent.TabIndex = 23;
-            this.btnDeleteStudent.Text = "Época de Recurso";
-            this.btnDeleteStudent.UseVisualStyleBackColor = true;
+            this.btnAppealExam.Location = new System.Drawing.Point(12, 191);
+            this.btnAppealExam.Name = "btnAppealExam";
+            this.btnAppealExam.Size = new System.Drawing.Size(115, 23);
+            this.btnAppealExam.TabIndex = 23;
+            this.btnAppealExam.Text = "Época de Recurso";
+            this.btnAppealExam.UseVisualStyleBackColor = true;
+            this.btnAppealExam.Click += new System.EventHandler(this.btnAppealExam_Click);
             // 
-            // lblName
+            // btnCancelExam
             // 
-            this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(593, 57);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(30, 13);
-            this.lblName.TabIndex = 28;
-            this.lblName.Text = "Nota";
+            this.btnCancelExam.Location = new System.Drawing.Point(368, 191);
+            this.btnCancelExam.Name = "btnCancelExam";
+            this.btnCancelExam.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelExam.TabIndex = 30;
+            this.btnCancelExam.Text = "Sair";
+            this.btnCancelExam.UseVisualStyleBackColor = true;
+            this.btnCancelExam.Click += new System.EventHandler(this.btnCancelExam_Click);
             // 
-            // lblStudentNumber
+            // label3
             // 
-            this.lblStudentNumber.AutoSize = true;
-            this.lblStudentNumber.Location = new System.Drawing.Point(342, 57);
-            this.lblStudentNumber.Name = "lblStudentNumber";
-            this.lblStudentNumber.Size = new System.Drawing.Size(140, 13);
-            this.lblStudentNumber.TabIndex = 27;
-            this.lblStudentNumber.Text = "Nome da Unidade Curricular";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(258, 68);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(94, 13);
+            this.label3.TabIndex = 32;
+            this.label3.Text = "Unidade Curricular";
             // 
-            // txtStudentName
+            // cbSubjectExam
             // 
-            this.txtStudentName.Location = new System.Drawing.Point(595, 73);
-            this.txtStudentName.Name = "txtStudentName";
-            this.txtStudentName.Size = new System.Drawing.Size(28, 20);
-            this.txtStudentName.TabIndex = 26;
+            this.cbSubjectExam.FormattingEnabled = true;
+            this.cbSubjectExam.Location = new System.Drawing.Point(261, 84);
+            this.cbSubjectExam.Name = "cbSubjectExam";
+            this.cbSubjectExam.Size = new System.Drawing.Size(182, 21);
+            this.cbSubjectExam.TabIndex = 31;
+            this.cbSubjectExam.SelectedIndexChanged += new System.EventHandler(this.cbSubjectExam_SelectedIndexChanged);
             // 
-            // txtStudentNumber
+            // label4
             // 
-            this.txtStudentNumber.Location = new System.Drawing.Point(342, 73);
-            this.txtStudentNumber.Name = "txtStudentNumber";
-            this.txtStudentNumber.Size = new System.Drawing.Size(227, 20);
-            this.txtStudentNumber.TabIndex = 25;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(164, 87);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(81, 13);
+            this.label4.TabIndex = 34;
+            this.label4.Text = "Época Recurso";
             // 
-            // btnCancelUpdateStudent
+            // lblStudentNameExam
             // 
-            this.btnCancelUpdateStudent.Location = new System.Drawing.Point(481, 339);
-            this.btnCancelUpdateStudent.Name = "btnCancelUpdateStudent";
-            this.btnCancelUpdateStudent.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelUpdateStudent.TabIndex = 30;
-            this.btnCancelUpdateStudent.Text = "Cancelar";
-            this.btnCancelUpdateStudent.UseVisualStyleBackColor = true;
+            this.lblStudentNameExam.AutoSize = true;
+            this.lblStudentNameExam.Location = new System.Drawing.Point(258, 27);
+            this.lblStudentNameExam.Name = "lblStudentNameExam";
+            this.lblStudentNameExam.Size = new System.Drawing.Size(86, 13);
+            this.lblStudentNameExam.TabIndex = 35;
+            this.lblStudentNameExam.Text = "Nome do Aluno: ";
             // 
-            // btnUpdateStudent
+            // cbAppealSubjectExam
             // 
-            this.btnUpdateStudent.Location = new System.Drawing.Point(562, 339);
-            this.btnUpdateStudent.Name = "btnUpdateStudent";
-            this.btnUpdateStudent.Size = new System.Drawing.Size(75, 23);
-            this.btnUpdateStudent.TabIndex = 29;
-            this.btnUpdateStudent.Text = "Confirmar";
-            this.btnUpdateStudent.UseVisualStyleBackColor = true;
+            this.cbAppealSubjectExam.FormattingEnabled = true;
+            this.cbAppealSubjectExam.Location = new System.Drawing.Point(261, 144);
+            this.cbAppealSubjectExam.Name = "cbAppealSubjectExam";
+            this.cbAppealSubjectExam.Size = new System.Drawing.Size(182, 21);
+            this.cbAppealSubjectExam.TabIndex = 36;
+            this.cbAppealSubjectExam.SelectedIndexChanged += new System.EventHandler(this.cbAppealSubjectExam_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(258, 128);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(94, 13);
+            this.label5.TabIndex = 37;
+            this.label5.Text = "Unidade Curricular";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(164, 147);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(81, 13);
+            this.label6.TabIndex = 38;
+            this.label6.Text = "Época Especial";
             // 
             // ExamEntry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(649, 374);
-            this.Controls.Add(this.btnCancelUpdateStudent);
-            this.Controls.Add(this.btnUpdateStudent);
-            this.Controls.Add(this.lblName);
-            this.Controls.Add(this.lblStudentNumber);
-            this.Controls.Add(this.txtStudentName);
-            this.Controls.Add(this.txtStudentNumber);
-            this.Controls.Add(this.btnEnrollStudent);
-            this.Controls.Add(this.btnDeleteStudent);
+            this.ClientSize = new System.Drawing.Size(455, 226);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.cbAppealSubjectExam);
+            this.Controls.Add(this.lblStudentNameExam);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.cbSubjectExam);
+            this.Controls.Add(this.btnCancelExam);
+            this.Controls.Add(this.btnSpecialExam);
+            this.Controls.Add(this.btnAppealExam);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnSearchStudentExamEntry);
-            this.Controls.Add(this.txtSearchStudentExamEntry);
+            this.Controls.Add(this.btnSearchStudentExam);
+            this.Controls.Add(this.txtSearchStudentExam);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dgAllScores);
             this.Name = "ExamEntry";
             this.Text = "ExamEntry";
-            ((System.ComponentModel.ISupportInitialize)(this.dgAllScores)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dgAllScores;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnSearchStudentExamEntry;
-        private System.Windows.Forms.TextBox txtSearchStudentExamEntry;
-        private System.Windows.Forms.Button btnEnrollStudent;
-        private System.Windows.Forms.Button btnDeleteStudent;
-        private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.Label lblStudentNumber;
-        private System.Windows.Forms.TextBox txtStudentName;
-        private System.Windows.Forms.TextBox txtStudentNumber;
-        private System.Windows.Forms.Button btnCancelUpdateStudent;
-        private System.Windows.Forms.Button btnUpdateStudent;
+        private System.Windows.Forms.Button btnSearchStudentExam;
+        private System.Windows.Forms.TextBox txtSearchStudentExam;
+        private System.Windows.Forms.Button btnSpecialExam;
+        private System.Windows.Forms.Button btnAppealExam;
+        private System.Windows.Forms.Button btnCancelExam;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cbSubjectExam;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblStudentNameExam;
+        private System.Windows.Forms.ComboBox cbAppealSubjectExam;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }
