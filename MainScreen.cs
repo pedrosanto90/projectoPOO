@@ -22,10 +22,11 @@ namespace projectoPOO
 			ToolStripMenuItem windowMenuHelp = new ToolStripMenuItem("Ajuda");
 
 			ToolStripMenuItem scoreAttribution = new ToolStripMenuItem("Atribuir Notas", null, new EventHandler(scoreAttribution_Click));
-            ToolStripMenuItem examEntry = new ToolStripMenuItem("Inscrever em Exame", null, new EventHandler(examEntry_Click));
-            ToolStripMenuItem closeProgram = new ToolStripMenuItem("Sair", null, new EventHandler(closeProgram_Click));
+			ToolStripMenuItem examEntry = new ToolStripMenuItem("Inscrever em Exame", null, new EventHandler(examEntry_Click));
+			ToolStripMenuItem newYear = new ToolStripMenuItem("Novo Ano Letivo", null, new EventHandler(newYear_Click));
+			ToolStripMenuItem closeProgram = new ToolStripMenuItem("Sair", null, new EventHandler(closeProgram_Click));
 
-            ToolStripMenuItem newStudent = new ToolStripMenuItem("Novo Aluno", null, new EventHandler(newStudent_Click));
+			ToolStripMenuItem newStudent = new ToolStripMenuItem("Novo Aluno", null, new EventHandler(newStudent_Click));
 			ToolStripMenuItem updateStudent = new ToolStripMenuItem("Actualizar Aluno", null, new EventHandler(updateStudent_Click));
 			ToolStripMenuItem showAllStudents = new ToolStripMenuItem("Mostrar todos os Alunos", null, new EventHandler(showAllStudents_Click));
 
@@ -41,10 +42,12 @@ namespace projectoPOO
 			ToolStripMenuItem upadateSubject = new ToolStripMenuItem("Atualizar Unidade Curricular ", null, new EventHandler(updateSubject_Click));
 			ToolStripMenuItem showAllSubjects = new ToolStripMenuItem("Mostrar todas as Unidades Curriculares ", null, new EventHandler(showAllSubjects_Click));
 
+			ToolStripMenuItem about = new ToolStripMenuItem("Acerca", null, new EventHandler(about_Click));
 
-            windowMenuFile.DropDownItems.Add(scoreAttribution);
+			windowMenuFile.DropDownItems.Add(scoreAttribution);
 			windowMenuFile.DropDownItems.Add(examEntry);
-            windowMenuFile.DropDownItems.Add(closeProgram);
+			windowMenuFile.DropDownItems.Add(newYear);
+			windowMenuFile.DropDownItems.Add(closeProgram);
 
 			windowMenuStudent.DropDownItems.Add(newStudent);
 			windowMenuStudent.DropDownItems.Add(updateStudent);
@@ -62,6 +65,8 @@ namespace projectoPOO
 			windowMenuSubject.DropDownItems.Add(upadateSubject);
 			windowMenuSubject.DropDownItems.Add(showAllSubjects);
 
+			windowMenuHelp.DropDownItems.Add(about);
+
 			// Assign the ToolStripMenuItem that displays 
 			// the list of child forms.
 			ms.MdiWindowListItem = windowMenuFile;
@@ -69,6 +74,7 @@ namespace projectoPOO
 			ms.MdiWindowListItem = windowMenuTeacher;
 			ms.MdiWindowListItem = windowMenuCourse;
 			ms.MdiWindowListItem = windowMenuSubject;
+			ms.MdiWindowListItem = windowMenuHelp;
 
 
 			// Add the window ToolStripMenuItem to the MenuStrip.
@@ -77,6 +83,7 @@ namespace projectoPOO
 			ms.Items.Add(windowMenuTeacher);
 			ms.Items.Add(windowMenuCourse);
 			ms.Items.Add(windowMenuSubject);
+			ms.Items.Add(windowMenuHelp);
 
 
 			// Dock the MenuStrip to the top of the form.
@@ -783,30 +790,44 @@ namespace projectoPOO
 			CloseProgram.Exit();
 		}
 
-        private void btnEnrollStudent_Click(object sender, EventArgs e)
-        {
-            Enroll newEnroll = new Enroll();
-
-            newEnroll.StudentNumber = txtStudentNumber.Text;
-            newEnroll.Subject = txtStudentCourse.Text;
-
-            Enrollment.EnrollStudent(newEnroll);
-            MessageBox.Show("Aluno inscrito com sucesso");
-			CleanBox();
-        }
-
-        void scoreAttribution_Click(object sender, EventArgs e)
-        {
-            GiveScores f = new GiveScores();
-            f.Text = "Atribuição de Notas";
-            f.Show();
-        }
-
-        void examEntry_Click(object sender, EventArgs e)
+		private void btnEnrollStudent_Click(object sender, EventArgs e)
 		{
-            ExamEntry f = new ExamEntry();
-            f.Text = "Inscrever em Exame";
-            f.Show();
-        }
-    }
+			Enroll newEnroll = new Enroll();
+
+			newEnroll.StudentNumber = txtStudentNumber.Text;
+			newEnroll.Subject = txtStudentCourse.Text;
+
+			Enrollment.EnrollStudent(newEnroll);
+			MessageBox.Show("Aluno inscrito com sucesso");
+			CleanBox();
+		}
+
+		void scoreAttribution_Click(object sender, EventArgs e)
+		{
+			GiveScores f = new GiveScores();
+			f.Text = "Atribuição de Notas";
+			f.Show();
+		}
+
+		void examEntry_Click(object sender, EventArgs e)
+		{
+			ExamEntry f = new ExamEntry();
+			f.Text = "Inscrever em Exame";
+			f.Show();
+		}
+
+		void about_Click(object sender, EventArgs e)
+		{
+			About f = new About();
+			f.Text = "Acerca";
+			f.Show();
+		}
+
+		void newYear_Click(object sender, EventArgs e)
+		{
+			NewYear f = new NewYear();
+			f.Text = "Novo Ano Letivo";
+			f.Show();
+		}
+	}
 }

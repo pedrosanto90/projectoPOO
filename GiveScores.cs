@@ -88,15 +88,15 @@ namespace projectoPOO
 				giveScore.Score = cbScore.SelectedItem.ToString();
 			}
 			Enrollment.SubjectScores(giveScore);
-			if (lblSeason.Text == "Época Normal de Exame")
+			if (lblSeason.Text == "Época Normal de Exame" || lblSeason.Text == "Época de Recurso" || lblSeason.Text == "Época Especial")
 			{
 				MessageBox.Show("Nota inserida com sucesso");
 
-                cbScore.SelectedIndex = -1;
-                cbSubject.SelectedIndex = -1;
+				cbScore.SelectedIndex = -1;
+				cbSubject.SelectedIndex = -1;
 				cbAttendance.Checked = false;
 				PopCB();
-            }
+			}
 			else
 			{
 				MessageBox.Show("Nota inserida com sucesso");
@@ -117,10 +117,10 @@ namespace projectoPOO
 				}
 
 				cbScore.SelectedIndex = -1;
-                cbSubject.SelectedIndex = -1;
-                cbAttendance.Checked = false;
-                PopCB();
-            }
+				cbSubject.SelectedIndex = -1;
+				cbAttendance.Checked = false;
+				PopCB();
+			}
 
 		}
 

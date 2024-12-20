@@ -73,7 +73,7 @@ namespace projectoPOO
 			{
 				cn.Open();
 
-                int failed = 20;
+				int failed = 20;
 				int passed = 30;
 
 				string query = @"UPDATE Inscricao
@@ -92,18 +92,18 @@ namespace projectoPOO
 					if (enroll.Score == null)
 					{
 						cmd.Parameters.AddWithValue("@nota", DBNull.Value);
-                        cmd.Parameters.AddWithValue("@estado", failed);
-                    }
+						cmd.Parameters.AddWithValue("@estado", failed);
+					}
 					else if (Int32.Parse(enroll.Score) < 10)
 					{
 						cmd.Parameters.AddWithValue("@nota", enroll.Score);
-                        cmd.Parameters.AddWithValue("@estado", failed);
-                    }
+						cmd.Parameters.AddWithValue("@estado", failed);
+					}
 					else
 					{
-                        cmd.Parameters.AddWithValue("@nota", enroll.Score);
-                        cmd.Parameters.AddWithValue("@estado", passed);
-                    }
+						cmd.Parameters.AddWithValue("@nota", enroll.Score);
+						cmd.Parameters.AddWithValue("@estado", passed);
+					}
 					return cmd.ExecuteNonQuery() > 0;
 				}
 			}
@@ -218,20 +218,20 @@ namespace projectoPOO
 			return season;
 		}
 
-        public static List<Enroll> GetAllScores(int number)
-        {
-            List<Enroll> enrollList = new List<Enroll>();
+		public static List<Enroll> GetAllScores(int number)
+		{
+			List<Enroll> enrollList = new List<Enroll>();
 
-            using (SqlConnection cn = new SqlConnection(Connection.Conn()))
-            {
-                try
-                {
-                    cn.Open();
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
+			{
+				try
+				{
+					cn.Open();
 
-                    int failed = 20;
-                    string exam = "ENEX";
+					int failed = 20;
+					string exam = "ENEX";
 
-                    string query = @"SELECT 
+					string query = @"SELECT 
                         UnidadeCurricular.nome, 
                         Inscricao.presenca, 
                         Inscricao.nota 
@@ -244,49 +244,49 @@ namespace projectoPOO
                      WHERE 
                         Inscricao.numeroAluno = @numero AND Inscricao.idEpocaAvaliacao = @avaliacao AND Inscricao.idEstadoEpoca = @epoca;";
 
-                    using (SqlCommand cmd = new SqlCommand(query, cn))
-                    {
-                        cmd.Parameters.AddWithValue("@numero", number);
-                        cmd.Parameters.AddWithValue("@avaliacao", exam);
-                        cmd.Parameters.AddWithValue("@epoca", failed);
+					using (SqlCommand cmd = new SqlCommand(query, cn))
+					{
+						cmd.Parameters.AddWithValue("@numero", number);
+						cmd.Parameters.AddWithValue("@avaliacao", exam);
+						cmd.Parameters.AddWithValue("@epoca", failed);
 
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                Enroll enroll = new Enroll
-                                {
-                                    Subject = reader["nome"].ToString(),
-                                    Attendance = reader["presenca"].ToString(),
-                                    Score = reader["nota"].ToString()
-                                };
-                                enrollList.Add(enroll);
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erro ao carregar dados: " + ex.Message);
-                }
-            }
+						using (SqlDataReader reader = cmd.ExecuteReader())
+						{
+							while (reader.Read())
+							{
+								Enroll enroll = new Enroll
+								{
+									Subject = reader["nome"].ToString(),
+									Attendance = reader["presenca"].ToString(),
+									Score = reader["nota"].ToString()
+								};
+								enrollList.Add(enroll);
+							}
+						}
+					}
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show("Erro ao carregar dados: " + ex.Message);
+				}
+			}
 
-            return enrollList;
-        }
+			return enrollList;
+		}
 
 
-        public static DataTable GetAllAppealScores(int number)
-        {
-            using (SqlConnection cn = new SqlConnection(Connection.Conn()))
-            {
-                try
-                {
-                    cn.Open();
+		public static DataTable GetAllAppealScores(int number)
+		{
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
+			{
+				try
+				{
+					cn.Open();
 
-                    int failed = 20;
-                    string exam = "EREC";
+					int failed = 20;
+					string exam = "EREC";
 
-                    string query = @"SELECT 
+					string query = @"SELECT 
                                 UnidadeCurricular.nome, 
                                 Inscricao.presenca, 
                                 Inscricao.nota 
@@ -299,197 +299,200 @@ namespace projectoPOO
                              WHERE 
                                 Inscricao.numeroAluno = @numero AND Inscricao.idEpocaAvaliacao = @avaliacao AND Inscricao.idEstadoEpoca = @epoca;";
 
-                    using (SqlCommand cmd = new SqlCommand(query, cn))
-                    {
-                        cmd.Parameters.AddWithValue("@numero", number);
-                        cmd.Parameters.AddWithValue("@avaliacao", exam);
-                        cmd.Parameters.AddWithValue("@epoca", failed);
+					using (SqlCommand cmd = new SqlCommand(query, cn))
+					{
+						cmd.Parameters.AddWithValue("@numero", number);
+						cmd.Parameters.AddWithValue("@avaliacao", exam);
+						cmd.Parameters.AddWithValue("@epoca", failed);
 
-                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
-                        {
-                            DataTable dataTable = new DataTable();
-                            adapter.Fill(dataTable);
-                            return dataTable;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erro ao carregar dados: " + ex.Message);
-                    return null;
-                }
-            }
-        }
+						using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+						{
+							DataTable dataTable = new DataTable();
+							adapter.Fill(dataTable);
+							return dataTable;
+						}
+					}
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show("Erro ao carregar dados: " + ex.Message);
+					return null;
+				}
+			}
+		}
 
-        //entrar na epoca de recurso
-        public static bool AppealExamEntry(Enroll enroll, int numero)
-        {
-            using (SqlConnection cn = new SqlConnection(Connection.Conn()))
-            {
-                cn.Open();
+		//entrar na epoca de recurso
+		public static bool AppealExamEntry(Enroll enroll, int numero)
+		{
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
+			{
+				cn.Open();
 
-                // Obtém o ano letivo atual
-                string getYear = "SELECT idAnoLetivo FROM Inscricao WHERE numeroAluno = @numero;";
-                int year = 1;
+				// Obtém o ano letivo atual
+				string getYear = "SELECT idAnoLetivo FROM Inscricao WHERE numeroAluno = @numero;";
+				int year = 1;
 
-                using (SqlCommand command = new SqlCommand(getYear, cn))
-                {
+				using (SqlCommand command = new SqlCommand(getYear, cn))
+				{
 					command.Parameters.AddWithValue("@numero", numero);
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read() && !reader.IsDBNull(0))
-                        {
-                            year = reader.GetInt16(0);
-                        }
-                    }
-                }
+					using (SqlDataReader reader = command.ExecuteReader())
+					{
+						if (reader.Read() && !reader.IsDBNull(0))
+						{
+							year = reader.GetInt16(0);
+						}
+					}
+				}
 
-                int admited = 10;
+				int admited = 10;
 				string season = "EREC";
 
-                // Inserir a inscrição do aluno na nova época de avaliação
-                string query = @"
+				// Inserir a inscrição do aluno na nova época de avaliação
+				string query = @"
         INSERT INTO Inscricao (numeroAluno, idUnidadeCurricular, idAnoLetivo, idEpocaAvaliacao, idEstadoEpoca)
 		VALUES (@numeroAluno, (SELECT id FROM UnidadeCurricular WHERE nome = @idUnidadeCurricular), @idAnoLetivo, @idEpocaAvaliacao, @idEstadoEpoca);";
 
-                using (SqlCommand cmd = new SqlCommand(query, cn))
-                {
-                    cmd.Parameters.AddWithValue("@numeroAluno", numero);
-                    cmd.Parameters.AddWithValue("@idUnidadeCurricular", enroll.Subject);
-                    cmd.Parameters.AddWithValue("@idAnoLetivo", year);
-                    cmd.Parameters.AddWithValue("@idEpocaAvaliacao", season);
-                    cmd.Parameters.AddWithValue("@idEstadoEpoca", admited);
+				using (SqlCommand cmd = new SqlCommand(query, cn))
+				{
+					cmd.Parameters.AddWithValue("@numeroAluno", numero);
+					cmd.Parameters.AddWithValue("@idUnidadeCurricular", enroll.Subject);
+					cmd.Parameters.AddWithValue("@idAnoLetivo", year);
+					cmd.Parameters.AddWithValue("@idEpocaAvaliacao", season);
+					cmd.Parameters.AddWithValue("@idEstadoEpoca", admited);
 
-                    return cmd.ExecuteNonQuery() > 0;  // Retorna true se a inserção for bem-sucedida
-                }
-            }
-        }
+					return cmd.ExecuteNonQuery() > 0;  // Retorna true se a inserção for bem-sucedida
+				}
+			}
+		}
 
-        //entrar na epoca especial
-        public static bool SpecialExamEntry(Enroll enroll, int numero)
-        {
-            using (SqlConnection cn = new SqlConnection(Connection.Conn()))
-            {
-                cn.Open();
+		//entrar na epoca especial
+		public static bool SpecialExamEntry(Enroll enroll, int numero)
+		{
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
+			{
+				cn.Open();
 
-                // Obtém o ano letivo atual
-                string getYear = "SELECT idAnoLetivo FROM Inscricao WHERE numeroAluno = @numero;";
-                int year = 1;
+				// Obtém o ano letivo atual
+				string getYear = "SELECT idAnoLetivo FROM Inscricao WHERE numeroAluno = @numero;";
+				int year = 1;
 
-                using (SqlCommand command = new SqlCommand(getYear, cn))
-                {
-                    command.Parameters.AddWithValue("@numero", numero);
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read() && !reader.IsDBNull(0))
-                        {
-                            year = reader.GetInt16(0);
-                        }
-                    }
-                }
+				using (SqlCommand command = new SqlCommand(getYear, cn))
+				{
+					command.Parameters.AddWithValue("@numero", numero);
+					using (SqlDataReader reader = command.ExecuteReader())
+					{
+						if (reader.Read() && !reader.IsDBNull(0))
+						{
+							year = reader.GetInt16(0);
+						}
+					}
+				}
 
-                int admited = 10;
-                string season = "EESP";
+				int admited = 10;
+				string season = "EESP";
 
-                // Inserir a inscrição do aluno na nova época de avaliação
-                string query = @"
+				// Inserir a inscrição do aluno na nova época de avaliação
+				string query = @"
         INSERT INTO Inscricao (numeroAluno, idUnidadeCurricular, idAnoLetivo, idEpocaAvaliacao, idEstadoEpoca)
 		VALUES (@numeroAluno, (SELECT id FROM UnidadeCurricular WHERE nome = @idUnidadeCurricular), @idAnoLetivo, @idEpocaAvaliacao, @idEstadoEpoca);";
 
-                using (SqlCommand cmd = new SqlCommand(query, cn))
-                {
-                    cmd.Parameters.AddWithValue("@numeroAluno", numero);
-                    cmd.Parameters.AddWithValue("@idUnidadeCurricular", enroll.Subject);
-                    cmd.Parameters.AddWithValue("@idAnoLetivo", year);
-                    cmd.Parameters.AddWithValue("@idEpocaAvaliacao", season);
-                    cmd.Parameters.AddWithValue("@idEstadoEpoca", admited);
+				using (SqlCommand cmd = new SqlCommand(query, cn))
+				{
+					cmd.Parameters.AddWithValue("@numeroAluno", numero);
+					cmd.Parameters.AddWithValue("@idUnidadeCurricular", enroll.Subject);
+					cmd.Parameters.AddWithValue("@idAnoLetivo", year);
+					cmd.Parameters.AddWithValue("@idEpocaAvaliacao", season);
+					cmd.Parameters.AddWithValue("@idEstadoEpoca", admited);
 
-                    return cmd.ExecuteNonQuery() > 0;  // Retorna true se a inserção for bem-sucedida
-                }
-            }
-        }
+					return cmd.ExecuteNonQuery() > 0;  // Retorna true se a inserção for bem-sucedida
+				}
+			}
+		}
 
-        public static List<Enroll> GetSubjectsExam(int number)
-        {
-            List<Enroll> subjectExam = new List<Enroll>();
-            using (SqlConnection cn = new SqlConnection(Connection.Conn()))
-            {
-                cn.Open();
+		public static List<Enroll> GetSubjectsExam(int number)
+		{
+			List<Enroll> subjectExam = new List<Enroll>();
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
+			{
+				cn.Open();
 
-                string query = @"SELECT DISTINCT UnidadeCurricular.nome AS UC
+				string query = @"SELECT UnidadeCurricular.nome AS UC
                                 FROM Inscricao
-                                JOIN UnidadeCurricular ON UnidadeCurricular.id = Inscricao.idUnidadeCurricular
+                                JOIN UnidadeCurricular ON UnidadeCurricular.id = Inscricao.idUnidadeCurricular 
                                 WHERE numeroAluno = @numero
-                                  AND nota < 10
-                                  AND idUnidadeCurricular = Inscricao.idUnidadeCurricular;";
+                                AND idEpocaAvaliacao = 'ENEX'
+                                
+								AND idEstadoEpoca = 20
+								
+                                AND idUnidadeCurricular NOT IN (
+                                        SELECT idUnidadeCurricular
+                                        FROM Inscricao
+                                        WHERE numeroAluno = @numero
+                                        AND idEpocaAvaliacao = 'EREC');";
 
-                using (SqlCommand cmd = new SqlCommand(query, cn))
-                {
-                    // Use parameterized query to prevent SQL injection
-                    cmd.Parameters.AddWithValue("@numero", number);
+				using (SqlCommand cmd = new SqlCommand(query, cn))
+				{
+					// Use parameterized query to prevent SQL injection
+					cmd.Parameters.AddWithValue("@numero", number);
 
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Enroll enroll = new Enroll
-                            {
-                                Subject = reader["UC"].ToString()
-                            };
-                            subjectExam.Add(enroll);
-                        }
-                        
-                    }
-                }
-            }
-            return subjectExam;
-        }
+					using (SqlDataReader reader = cmd.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							Enroll enroll = new Enroll
+							{
+								Subject = reader["UC"].ToString()
+							};
+							subjectExam.Add(enroll);
+						}
 
-        public static List<Enroll> GetSubjectsAppealExam(int number)
-        {
-            List<Enroll> subjectAppealExam = new List<Enroll>();
-            using (SqlConnection cn = new SqlConnection(Connection.Conn()))
-            {
-                cn.Open();
+					}
+				}
+			}
+			return subjectExam;
+		}
 
-                string query = @"SELECT DISTINCT UnidadeCurricular.nome AS UC
-                                    FROM Inscricao
-                                    JOIN UnidadeCurricular ON UnidadeCurricular.id = Inscricao.idUnidadeCurricular
-                                    WHERE Inscricao.numeroAluno = @numero
-                                      AND Inscricao.nota < 10
-                                      AND EXISTS (
-                                        SELECT 1
-                                        FROM Inscricao i
-                                        WHERE i.idUnidadeCurricular = Inscricao.idUnidadeCurricular
-                                          AND i.idEpocaAvaliacao = 'EREC'
-                                      )
-                                      AND NOT EXISTS (
-                                        SELECT 1
-                                        FROM Inscricao i
-                                        WHERE i.idUnidadeCurricular = Inscricao.idUnidadeCurricular
-                                          AND i.idEpocaAvaliacao = 'EESP'
-                                      );";
+		public static List<Enroll> GetSubjectsAppealExam(int number)
+		{
+			List<Enroll> subjectAppealExam = new List<Enroll>();
+			using (SqlConnection cn = new SqlConnection(Connection.Conn()))
+			{
+				cn.Open();
 
-                using (SqlCommand cmd = new SqlCommand(query, cn))
-                {
-                    // Use parameterized query to prevent SQL injection
-                    cmd.Parameters.AddWithValue("@numero", number);
+				string query = @"SELECT UnidadeCurricular.nome AS UC
+                                FROM Inscricao
+                                JOIN UnidadeCurricular ON UnidadeCurricular.id = Inscricao.idUnidadeCurricular 
+                                WHERE numeroAluno = @numero
+                                AND idEpocaAvaliacao = 'EREC'
+                                
+								AND idEstadoEpoca = 20
+								
+                                AND idUnidadeCurricular NOT IN (
+                                        SELECT idUnidadeCurricular
+                                        FROM Inscricao
+                                        WHERE numeroAluno = @numero
+                                        AND idEpocaAvaliacao = 'EESP');";
 
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Enroll enroll = new Enroll
-                            {
-                                Subject = reader["UC"].ToString()
-                            };
-                            subjectAppealExam.Add(enroll);
-                        }
+				using (SqlCommand cmd = new SqlCommand(query, cn))
+				{
+					// Use parameterized query to prevent SQL injection
+					cmd.Parameters.AddWithValue("@numero", number);
 
-                    }
-                }
-            }
-            return subjectAppealExam;
-        }
-    }
+					using (SqlDataReader reader = cmd.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							Enroll enroll = new Enroll
+							{
+								Subject = reader["UC"].ToString()
+							};
+							subjectAppealExam.Add(enroll);
+						}
+
+					}
+				}
+			}
+			return subjectAppealExam;
+		}
+	}
 }
